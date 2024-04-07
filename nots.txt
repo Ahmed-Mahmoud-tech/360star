@@ -1,0 +1,8 @@
+dynamic models
+zoom 
+new drag
+cursor
+map
+list of actions
+switch drag way 
+vr

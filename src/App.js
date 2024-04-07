@@ -1,463 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import arrowImage from './assets/images/arrow.png';
+import { models } from './objects';
+const currentModel = 'star';
 
-const points = [
-    {
-        image: process.env.PUBLIC_URL + '/assets/images/01.png',  neighbors: [
-           {
-                degree: 0,
-                imageIndex: 1
-            },
-           {
-                degree: 270,
-                imageIndex: 4
-            },
-          
-        ],
-        info: {
-            position: {
-                x: 0,
-                y: 0,
-                z: 0,
-            },
-            title: "title",
-            description: "description description description description description description description description ",
-        }
-    },
-    {
-        image: process.env.PUBLIC_URL + '/assets/images/02.png',
-     neighbors: [
-           {
-                degree: 0,
-                imageIndex: 2
-            },
-            {
-                degree: 270,
-                imageIndex: 5
-            },
-            {
-                degree: 180,
-                imageIndex: 0
-            },
-       
-          
-        ],
-        info: {
-            position: {
-                x: 0,
-                y: 0,
-                z: 0,
-            },
-            title: "title",
-            description: "description description description description description description description description ",
-        }
-    },
-    {
-        image: process.env.PUBLIC_URL + '/assets/images/03.png',
-       neighbors: [
-           {
-                degree: 0,
-                imageIndex: 3
-            },
-            {
-                degree: 270,
-                imageIndex: 6
-            },
-            {
-                degree: 180,
-                imageIndex: 1
-            },
-     
-          
-        ],
-        info: {
-            position: {
-                x: 0,
-                y: 0,
-                z: 0,
-            },
-            title: "title",
-            description: "description description description description description description description description ",
-        }
-    },
-    {
-        image: process.env.PUBLIC_URL + '/assets/images/04.png',
-        neighbors: [
-      
-            {
-                degree: 270,
-                imageIndex: 7
-            },
-            {
-                degree: 180,
-                imageIndex: 2
-            },
-         
-          
-        ],
-        info: {
-            position: {
-                x: 0,
-                y: 0,
-                z: 0,
-            },
-            title: "title",
-            description: "description description description description description description description description ",
-        }
-    },
-    {
-        image: process.env.PUBLIC_URL + '/assets/images/05.png',
-      neighbors: [
-           {
-                degree: 0,
-                imageIndex: 5
-            },
-            {
-                degree: 270,
-                imageIndex: 8
-            },
-       
-            {
-                 degree: 90,
-                 imageIndex: 0
-             },
-          
-        ],
-        info: {
-            position: {
-                x: 0,
-                y: 0,
-                z: 0,
-            },
-            title: "title",
-            description: "description description description description description description description description ",
-        }
-    },
-   
-    {
-        image: process.env.PUBLIC_URL + '/assets/images/06.png',
-       neighbors: [
-           {
-                degree: 0,
-                imageIndex: 6
-            },
-            {
-                degree: 270,
-                imageIndex: 9
-            },
-            {
-                degree: 180,
-                imageIndex: 4
-            },
-            {
-                 degree: 90,
-                 imageIndex: 1
-             },
-          
-        ],
-        info: {
-            position: {
-                x: 0,
-                y: 0,
-                z: 0,
-            },
-            title: "title",
-            description: "description description description description description description description description ",
-        }
-  },
-     {
-        image: process.env.PUBLIC_URL + '/assets/images/07.png',
-    neighbors: [
-           {
-                degree: 0,
-                imageIndex: 7
-            },
-            {
-                degree: 270,
-                imageIndex: 10
-            },
-            {
-                degree: 180,
-                imageIndex: 5
-            },
-            {
-                 degree: 90,
-                 imageIndex: 2
-             },
-          
-        ],
-        info: {
-            position: {
-                x: 0,
-                y: 0,
-                z: 0,
-            },
-            title: "title",
-            description: "description description description description description description description description ",
-        }
-  },
 
-      {
-        image: process.env.PUBLIC_URL + '/assets/images/08.png',
-     neighbors: [
-      
-            {
-                degree: 270,
-                imageIndex: 11
-            },
-            {
-                degree: 180,
-                imageIndex: 6
-            },
-            {
-                 degree: 90,
-                 imageIndex: 3
-             },
-          
-        ],
-        info: {
-            position: {
-                x: 0,
-                y: 0,
-                z: 0,
-            },
-            title: "title",
-            description: "description description description description description description description description ",
-        }
-  },
-      
-            {
-        image: process.env.PUBLIC_URL + '/assets/images/09.png',
-      neighbors: [
-           {
-                degree: 0,
-                imageIndex: 9
-            },
-            {
-                degree: 270,
-                imageIndex: 12
-            },
-   
-            {
-                 degree: 90,
-                 imageIndex: 4
-             },
-          
-        ],
-        info: {
-            position: {
-                x: 0,
-                y: 0,
-                z: 0,
-            },
-            title: "title",
-            description: "description description description description description description description description ",
-        }
-    },
-            {
-        image: process.env.PUBLIC_URL + '/assets/images/10.png',
-  neighbors: [
-           {
-                degree: 0,
-                imageIndex: 10
-            },
-            {
-                degree: 270,
-                imageIndex: 13
-            },
-            {
-                degree: 180,
-                imageIndex: 8
-            },
-            {
-                 degree: 90,
-                 imageIndex: 5
-             },
-          
-        ],
-        info: {
-            position: {
-                x: 0,
-                y: 0,
-                z: 0,
-            },
-            title: "title",
-            description: "description description description description description description description description ",
-        }
-    },
-            {
-        image: process.env.PUBLIC_URL + '/assets/images/11.png',
-  neighbors: [
-           {
-                degree: 0,
-                imageIndex: 11
-            },
-            {
-                degree: 270,
-                imageIndex: 14
-            },
-            {
-                degree: 180,
-                imageIndex: 9
-            },
-            {
-                 degree: 90,
-                 imageIndex: 6
-             },
-          
-        ],
-        info: {
-            position: {
-                x: 0,
-                y: 0,
-                z: 0,
-            },
-            title: "title",
-            description: "description description description description description description description description ",
-        }
-    },
-            {
-        image: process.env.PUBLIC_URL + '/assets/images/12.png',
- neighbors: [
-     
-            {
-                degree: 270,
-                imageIndex: 15
-            },
-            {
-                degree: 180,
-                imageIndex: 10
-            },
-            {
-                 degree: 90,
-                 imageIndex: 7
-             },
-          
-        ],
-        info: {
-            position: {
-                x: 0,
-                y: 0,
-                z: 0,
-            },
-            title: "title",
-            description: "description description description description description description description description ",
-        }
-    },
-            {
-        image: process.env.PUBLIC_URL + '/assets/images/13.png',
-  neighbors: [
-           {
-                degree: 0,
-                imageIndex: 13
-            },
- 
-      
-            {
-                 degree: 90,
-                 imageIndex: 8
-             },
-          
-        ],
-        info: {
-            position: {
-                x: 0,
-                y: 0,
-                z: 0,
-            },
-            title: "title",
-            description: "description description description description description description description description ",
-        }
-    },
-            {
-        image: process.env.PUBLIC_URL + '/assets/images/14.png',
-  neighbors: [
-           {
-                degree: 0,
-                imageIndex: 14
-            },
-    
-            {
-                degree: 180,
-                imageIndex: 12
-            },
-            {
-                 degree: 90,
-                 imageIndex: 9
-             },
-          
-        ],
-        info: {
-            position: {
-                x: 0,
-                y: 0,
-                z: 0,
-            },
-            title: "title",
-            description: "description description description description description description description description ",
-        }
-    },
-            {
-        image: process.env.PUBLIC_URL + '/assets/images/15.png',
- neighbors: [
-           {
-                degree: 0,
-                imageIndex: 15
-            },
-    
-            {
-                degree: 180,
-                imageIndex: 13
-            },
-            {
-                 degree: 90,
-                 imageIndex: 10
-             },
-          
-        ],
-        info: {
-            position: {
-                x: 0,
-                y: 0,
-                z: 0,
-            },
-            title: "title",
-            description: "description description description description description description description description ",
-        }
-    },
-            {
-        image: process.env.PUBLIC_URL + '/assets/images/16.png',
-  neighbors: [
-    
-    
-            {
-                degree: 180,
-                imageIndex: 14
-            },
-            {
-                 degree: 90,
-                 imageIndex: 11
-             },
-          
-        ],
-        info: {
-            position: {
-                x: 0,
-                y: 0,
-                z: 0,
-            },
-            title: "title",
-            description: "description description description description description description description description ",
-        }
-    },
-   
-  ]
+const points = models[currentModel].points
 
  function App() {
 
 const [currentPoint, setCurrentPoint] = useState(0)
 const [oldPoint, setOldPoint] = useState(0)
 const [isFirstSky, setIsFirstSky] = useState(true)
+const [toggleCursor, setToggleCursor] = useState(true)
 
   // const images = [process.env.PUBLIC_URL + '/assets/images/1.jpg', process.env.PUBLIC_URL + '/assets/images/2.jpg', process.env.PUBLIC_URL + '/assets/images/3.jpg', process.env.PUBLIC_URL + '/assets/images/4.jpg', process.env.PUBLIC_URL + '/assets/images/5.jpg', process.env.PUBLIC_URL + '/assets/images/6.jpg', process.env.PUBLIC_URL + '/assets/images/7.jpg', process.env.PUBLIC_URL + '/assets/images/8.jpg', process.env.PUBLIC_URL + '/assets/images/9.jpg', process.env.PUBLIC_URL + '/assets/images/10.jpg', process.env.PUBLIC_URL + '/assets/images/11.jpg', process.env.PUBLIC_URL + '/assets/images/12.jpg', process.env.PUBLIC_URL + '/assets/images/13.jpg', process.env.PUBLIC_URL + '/assets/images/14.jpg', process.env.PUBLIC_URL + '/assets/images/15.jpg'];
 
@@ -487,7 +41,8 @@ const [isFirstSky, setIsFirstSky] = useState(true)
 
   }
 
-  const move = (index) => {
+   const move = (index) => {
+   
     setIsFirstSky(!isFirstSky);
     isFirstSky ? changeSky('#fSky', '#fSky2') : changeSky('#fSky2', '#fSky')
  
@@ -498,11 +53,73 @@ const [isFirstSky, setIsFirstSky] = useState(true)
  
   }
  
-  
+
+  //  useEffect(() => {
+  //  function triggerClickAtCenter() {
+  //       // Get the scene element
+  //       var scene = document.querySelector('canvas');
+
+  //       // Calculate the center of the screen
+  //       var centerX = window.innerWidth / 2;
+  //       var centerY = window.innerHeight / 2;
+
+  //       // Dispatch a click event at the center of the screen
+  //       var clickEvent = new MouseEvent('click', {
+  //         clientX: centerX,
+  //         clientY: centerY
+  //       });
+  //    setTimeout(() => {
+      
+  //      scene.dispatchEvent(clickEvent);
+  //    }, 2000);
+  //  }
+     
+     
+  // document.querySelector('canvas') && document.querySelector('canvas').addEventListener('click', function() {
+  //   triggerClickAtCenter();
+  //   console.log("hamada");
+  //     });
+  //  }, [document.querySelector('canvas')])
+   useEffect(() => {
+   
+     const toggleCursorFunction = () => {
+       
+       setToggleCursor(false);
+       setTimeout(() => {
+         setToggleCursor(true);
+        }, 100);
+     }
+     
+ document.querySelector('body').addEventListener('click', function() {
+    toggleCursorFunction();
+    console.log("hamada");
+      });
+     
+
+   }, [])
+   
+     
   return (
     <>
+      <span className='cross'></span>
       <a-scene cursor="rayOrigin: mouse" >
-        <a-camera wasd-controls='acceleration=1'  rotation="0 0 0"></a-camera>
+ 
+        {/* <a-camera wasd-controls='acceleration=1' id="camera"  rotation="0 0 0" reverseMouseDrag="true" pointerLockEnabled="true"></a-camera> */}
+        <a-camera look-controls="pointerLockEnabled:true" wasd-controls='acceleration=1' reverseMouseDrag="true" id="camera" >
+         {/* {<a-entity
+
+            cursor="fuse: false"
+            position="0 0 -0.01"
+            geometry="primitive: ring; radiusInner: 0; radiusOuter: 0.0001"
+            material="color: red; shader: flat">
+  </a-entity>} */}
+
+              <a-entity  cursor="click:true;"  position="0 0 -1"  geometry="primitive: ring; radiusInner: 0.025; radiusOuter: 0.03" material="color: red; shader:flat; opacity:1"
+                        raycaster="object: .dinosaurmodel"></a-entity>
+</a-camera>
+{/* <a-entity raycaster="showLine: true; far: 200; lineColor: red; lineOpacity: 0.5"></a-entity> */}
+{/* <a-camera look-controls="reverseMouseDrag:true" wasd-controls='acceleration=1' reverseMouseDrag="true"  id="camera" ></a-camera> */}
+
         <a-sky
           radius="100"
           rotation="0 270 0"
@@ -529,8 +146,8 @@ const [isFirstSky, setIsFirstSky] = useState(true)
         </a-sky>
    
         {points[currentPoint].neighbors.map((neighbor, index) => 
-          <a-entity key={index} position="0 -5 0" rotation={`0 ${neighbor.degree} 0`}>
-            <a-triangle rotation="-90 0 0" material="color:black" geometry="" position="0 0.6 -9" scale="2 2 2" onClick={() => move(neighbor.imageIndex)} animation="property: material.opacity; from: 0; to: 1; dur: 1000; dir: alternate; loop: true;"></a-triangle>
+          <a-entity key={Math.random()} position="0 -5 0" rotation={`0 ${neighbor.degree} 0`} className="" >
+            <a-triangle className="clickable" rotation="-90 0 0" material="shader:flat; color:black" geometry="" position="0 0.6 -9" scale="2 2 2" onClick={() => move(neighbor.imageIndex)} animation="property: material.opacity; from: 0.5; to: 0; dur: 1000; dir: alternate; loop: true;"></a-triangle>
           </a-entity>
         )}
 
