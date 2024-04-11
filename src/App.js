@@ -87,6 +87,36 @@ const [toggleCursor, setToggleCursor] = useState(true)
        canvas.addEventListener('dblclick', disablePointerLock)
       }, 1000);
      
+     
+     
+     /***************** */
+
+//      var gyroscope = null;
+// try {
+//     gyroscope = new Gyroscope();
+//     gyroscope.addEventListener('error', event => {
+//         document.getElementById("camera").setAttribute("look-controls", "magicWindowTrackingEnabled: false");
+//     });
+//     gyroscope.start();
+//     // Stop the gyroscope after trying so it does not run in background.
+//     setTimeout(function() { gyroscope.stop(); }, 500);
+// } catch (error) {
+//     document.getElementById("camera").setAttribute("look-controls", "magicWindowTrackingEnabled: false");
+     // }
+     
+
+       if ('Gyroscope' in window) {
+        let gyroscope = window.Gyroscope({frequency: 60});
+
+        gyroscope.addEventListener('reading', e => {
+            console.log("Angular velocity along the X-axis " + gyroscope.x);
+            console.log("Angular velocity along the Y-axis " + gyroscope.y);
+            console.log("Angular velocity along the Z-axis " + gyroscope.z);
+        });
+        gyroscope.start();
+    } else {
+        console.log("Gyroscope API is not supported in this browser.");
+    }
    }, [])
    
      
