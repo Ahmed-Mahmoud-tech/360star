@@ -99,7 +99,7 @@ const [toggleCursor, setToggleCursor] = useState(true)
       <a-scene cursor="rayOrigin: mouse"  magic-window-tracking-enabled="true" >
  
         {/* <a-camera wasd-controls='acceleration=1' id="camera"  rotation="0 0 0" reverseMouseDrag="true" pointerLockEnabled="true"></a-camera> */}
-        <a-camera look-controls="pointerLockEnabled:true" wasd-controls='acceleration=1;magicWindowTrackingEnabled=true' reverseMouseDrag="true" id="camera" >
+        <a-camera look-controls="pointerLockEnabled:true;magicWindowTrackingEnabled=true" wasd-controls='acceleration=1;' reverseMouseDrag="true" id="camera" >
          {/* {<a-entity
 
             cursor="fuse: false"
