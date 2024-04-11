@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import arrowImage from './assets/images/arrow.png';
 import clickIcon from './assets/images/click.png';
 import { models } from './objects';
 import StartingPopUp from './components/StartingPopUp/StartingPopUp';
@@ -11,11 +10,12 @@ const points = models[currentModel].points
 function App() {
    
   const [startingPopUp, setStartingPopUp] = useState(true)
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 const [currentPoint, setCurrentPoint] = useState(0)
 const [oldPoint, setOldPoint] = useState(0)
 const [isFirstSky, setIsFirstSky] = useState(true)
-const [toggleCursor, setToggleCursor] = useState(true)
+// const [toggleCursor, setToggleCursor] = useState(true)
 
   // const images = [process.env.PUBLIC_URL + '/assets/images/1.jpg', process.env.PUBLIC_URL + '/assets/images/2.jpg', process.env.PUBLIC_URL + '/assets/images/3.jpg', process.env.PUBLIC_URL + '/assets/images/4.jpg', process.env.PUBLIC_URL + '/assets/images/5.jpg', process.env.PUBLIC_URL + '/assets/images/6.jpg', process.env.PUBLIC_URL + '/assets/images/7.jpg', process.env.PUBLIC_URL + '/assets/images/8.jpg', process.env.PUBLIC_URL + '/assets/images/9.jpg', process.env.PUBLIC_URL + '/assets/images/10.jpg', process.env.PUBLIC_URL + '/assets/images/11.jpg', process.env.PUBLIC_URL + '/assets/images/12.jpg', process.env.PUBLIC_URL + '/assets/images/13.jpg', process.env.PUBLIC_URL + '/assets/images/14.jpg', process.env.PUBLIC_URL + '/assets/images/15.jpg'];
 
@@ -58,22 +58,22 @@ const [toggleCursor, setToggleCursor] = useState(true)
   }
  
 
-   useEffect(() => {
+//    useEffect(() => {
    
-     const toggleCursorFunction = () => {
+//      const toggleCursorFunction = () => {
        
-       setToggleCursor(false);
-       setTimeout(() => {
-         setToggleCursor(true);
-        }, 100);
-     }
+//        setToggleCursor(false);
+//        setTimeout(() => {
+//          setToggleCursor(true);
+//         }, 100);
+//      }
      
- document.querySelector('body').addEventListener('click', function() {
-    toggleCursorFunction();
-       });
+//  document.querySelector('body').addEventListener('click', function() {
+//     toggleCursorFunction();
+//        });
      
 
-   }, [])
+//    }, [])
    
    const disablePointerLock = () => {
       document.exitPointerLock = document.exitPointerLock || document.mozExitPointerLock || document.webkitExitPointerLock;
@@ -91,19 +91,6 @@ const [toggleCursor, setToggleCursor] = useState(true)
      
      /***************** */
 
-//      var gyroscope = null;
-// try {
-//     gyroscope = new Gyroscope();
-//     gyroscope.addEventListener('error', event => {
-//         document.getElementById("camera").setAttribute("look-controls", "magicWindowTrackingEnabled: false");
-//     });
-//     gyroscope.start();
-//     // Stop the gyroscope after trying so it does not run in background.
-//     setTimeout(function() { gyroscope.stop(); }, 500);
-// } catch (error) {
-//     document.getElementById("camera").setAttribute("look-controls", "magicWindowTrackingEnabled: false");
-     // }
-     
 
        if ('Gyroscope' in window) {
         let gyroscope = new window.Gyroscope({frequency: 60});
@@ -122,10 +109,8 @@ const [toggleCursor, setToggleCursor] = useState(true)
      
   return (
     <>
-      {startingPopUp && <StartingPopUp setStartingPopUp={setStartingPopUp} />}
-      <span className='cross' style={{backgroundImage: `url(${clickIcon}`}}>
-         {/* <img src={clickIcon} alt="clickCursor" /> */}
-      </span>
+      {!isMobile && startingPopUp && <StartingPopUp setStartingPopUp={setStartingPopUp} />}
+      {!isMobile && <span className='cross' style={{backgroundImage: `url(${clickIcon}`}}>  </span>}
       <a-scene cursor="rayOrigin: mouse" >
  
         {/* <a-camera wasd-controls='acceleration=1' id="camera"  rotation="0 0 0" reverseMouseDrag="true" pointerLockEnabled="true"></a-camera> */}
