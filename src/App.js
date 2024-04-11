@@ -96,10 +96,10 @@ const [toggleCursor, setToggleCursor] = useState(true)
       <span className='cross' style={{backgroundImage: `url(${clickIcon}`}}>
          {/* <img src={clickIcon} alt="clickCursor" /> */}
       </span>
-      <a-scene cursor="rayOrigin: mouse"  magic-window-tracking-enabled="true" >
+      <a-scene cursor="rayOrigin: mouse" >
  
         {/* <a-camera wasd-controls='acceleration=1' id="camera"  rotation="0 0 0" reverseMouseDrag="true" pointerLockEnabled="true"></a-camera> */}
-        <a-camera look-controls="pointerLockEnabled:true;magicWindowTrackingEnabled=true" wasd-controls='acceleration=1;' reverseMouseDrag="true" id="camera" >
+        <a-camera look-controls="pointerLockEnabled:true;magicWindowTrackingEnabled:true" wasd-controls='acceleration=1;' reverseMouseDrag="true" id="camera" >
          {/* {<a-entity
 
             cursor="fuse: false"
