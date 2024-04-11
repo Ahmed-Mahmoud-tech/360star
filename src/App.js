@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import arrowImage from './assets/images/arrow.png';
+import clickIcon from './assets/images/click.png';
 import { models } from './objects';
+import StartingPopUp from './components/StartingPopUp/StartingPopUp';
 const currentModel = 'star';
 
 
 const points = models[currentModel].points
 
- function App() {
+function App() {
+   
+  const [startingPopUp, setStartingPopUp] = useState(true)
 
 const [currentPoint, setCurrentPoint] = useState(0)
 const [oldPoint, setOldPoint] = useState(0)
@@ -54,32 +58,6 @@ const [toggleCursor, setToggleCursor] = useState(true)
   }
  
 
-  //  useEffect(() => {
-  //  function triggerClickAtCenter() {
-  //       // Get the scene element
-  //       var scene = document.querySelector('canvas');
-
-  //       // Calculate the center of the screen
-  //       var centerX = window.innerWidth / 2;
-  //       var centerY = window.innerHeight / 2;
-
-  //       // Dispatch a click event at the center of the screen
-  //       var clickEvent = new MouseEvent('click', {
-  //         clientX: centerX,
-  //         clientY: centerY
-  //       });
-  //    setTimeout(() => {
-      
-  //      scene.dispatchEvent(clickEvent);
-  //    }, 2000);
-  //  }
-     
-     
-  // document.querySelector('canvas') && document.querySelector('canvas').addEventListener('click', function() {
-  //   triggerClickAtCenter();
-  //   console.log("hamada");
-  //     });
-  //  }, [document.querySelector('canvas')])
    useEffect(() => {
    
      const toggleCursorFunction = () => {
@@ -92,20 +70,36 @@ const [toggleCursor, setToggleCursor] = useState(true)
      
  document.querySelector('body').addEventListener('click', function() {
     toggleCursorFunction();
-    console.log("hamada");
-      });
+       });
      
 
+   }, [])
+   
+   const disablePointerLock = () => {
+      document.exitPointerLock = document.exitPointerLock || document.mozExitPointerLock || document.webkitExitPointerLock;
+     document.exitPointerLock();
+ }
+
+ 
+   useEffect(() => {
+     setTimeout(() => {
+       const canvas = document.querySelector('canvas');
+       canvas.addEventListener('dblclick', disablePointerLock)
+      }, 1000);
+     
    }, [])
    
      
   return (
     <>
-      <span className='cross'></span>
+      {startingPopUp && <StartingPopUp setStartingPopUp={setStartingPopUp} />}
+      <span className='cross' style={{backgroundImage: `url(${clickIcon}`}}>
+         {/* <img src={clickIcon} alt="clickCursor" /> */}
+      </span>
       <a-scene cursor="rayOrigin: mouse" >
  
         {/* <a-camera wasd-controls='acceleration=1' id="camera"  rotation="0 0 0" reverseMouseDrag="true" pointerLockEnabled="true"></a-camera> */}
-        <a-camera look-controls="pointerLockEnabled:true" wasd-controls='acceleration=1' reverseMouseDrag="true" id="camera" >
+        <a-camera look-controls="pointerLockEnabled:true" wasd-controls='acceleration=1;magicWindowTrackingEnabled=true' reverseMouseDrag="true" id="camera" >
          {/* {<a-entity
 
             cursor="fuse: false"
@@ -114,7 +108,7 @@ const [toggleCursor, setToggleCursor] = useState(true)
             material="color: red; shader: flat">
   </a-entity>} */}
 
-              <a-entity  cursor="click:true;"  position="0 0 -1"  geometry="primitive: ring; radiusInner: 0.025; radiusOuter: 0.03" material="color: red; shader:flat; opacity:1"
+              <a-entity  cursor="click:true;"  position="0 0 -1"  geometry="primitive: ring; radiusInner: 0.025; radiusOuter: 0.03" material=" shader:flat; opacity:0"
                         raycaster="object: .dinosaurmodel"></a-entity>
 </a-camera>
 {/* <a-entity raycaster="showLine: true; far: 200; lineColor: red; lineOpacity: 0.5"></a-entity> */}

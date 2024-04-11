@@ -12,7 +12,18 @@ code {
     monospace;
 }
 
+img {
+  max-width: 100%;
+}
 
+*{
+      font-family: cursive;
+      box-sizing: border-box;
+}
+
+button{
+  cursor: pointer;
+}
 .fixed {
   position: relative;
   /* top: 0 */
@@ -24,22 +35,35 @@ span.cross {
   position: fixed;
   z-index: 1000;
   width: 50px;
-  background: black;
-  height: 1.5px;
+  height: 50px;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  background-position: center;
+  background-size: contain;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
 
-span.cross:before {
-  content: "";
-  position: fixed;
+
+.popUpContainer {
   z-index: 1000;
-  height: 50px;
-  background: black;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  margin: 10px;
   left: 50%;
-  width: 1.5px;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+
+button.action {
+  margin: 10px auto 0;
+  padding: 5px 30px;
+  background: #fffc6d;
+  border-radius: 5px;
 }

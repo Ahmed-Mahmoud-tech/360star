@@ -1,8 +1,5 @@
-dynamic models
-zoom 
-new drag
-cursor
 map
+mobile
 list of actions
 switch drag way 
 vr
