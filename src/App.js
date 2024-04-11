@@ -106,7 +106,7 @@ const [toggleCursor, setToggleCursor] = useState(true)
      
 
        if ('Gyroscope' in window) {
-        let gyroscope = window.Gyroscope({frequency: 60});
+        let gyroscope = new window.Gyroscope({frequency: 60});
 
         gyroscope.addEventListener('reading', e => {
             console.log("Angular velocity along the X-axis " + gyroscope.x);
