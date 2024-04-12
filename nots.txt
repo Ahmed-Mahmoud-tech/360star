@@ -1,5 +1,8 @@
-map
-mobile
-list of actions
-switch drag way 
-vr
+deploy
+
+// list of actions
+// vr
+
+our website
+create the other models
+

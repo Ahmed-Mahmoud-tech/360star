@@ -13,6 +13,12 @@ export const models = {
                 },
           
             ],
+
+                   map: {
+                x: "74",
+                y: "68" ,
+            },
+                   
             info: {
                 position: {
                     x: 0,
@@ -41,6 +47,15 @@ export const models = {
        
           
             ],
+     
+       map: {
+                x: "74",
+                y: "57" ,
+            },
+  
+    
+  
+        
             info: {
                 position: {
                     x: 0,
@@ -69,6 +84,12 @@ export const models = {
      
           
             ],
+
+             map: {
+                x: "74",
+                y: "46" ,
+            },
+               
             info: {
                 position: {
                     x: 0,
@@ -94,6 +115,16 @@ export const models = {
          
           
             ],
+
+                      map: {
+                x: "74",
+                y: "35" ,
+            },
+                        
+             
+            
+
+                        
             info: {
                 position: {
                     x: 0,
@@ -122,6 +153,15 @@ export const models = {
                 },
           
             ],
+
+                   map: {
+                x: "63",
+                y: "68" ,
+            },
+                        
+             
+            
+                    
             info: {
                 position: {
                     x: 0,
@@ -154,6 +194,14 @@ export const models = {
                 },
           
             ],
+
+                      map: {
+                x: "63",
+                y: "57" ,
+            },
+                     
+                        
+                      
             info: {
                 position: {
                     x: 0,
@@ -185,6 +233,14 @@ export const models = {
                 },
           
             ],
+
+                     map: {
+                x: "63",
+                y: "46" ,
+            },
+                     
+                   
+                        
             info: {
                 position: {
                     x: 0,
@@ -214,6 +270,12 @@ export const models = {
                 },
           
             ],
+                           map: {
+                x: "63",
+                y: "35" ,
+            },
+                     
+                           
             info: {
                 position: {
                     x: 0,
@@ -243,6 +305,12 @@ export const models = {
                 },
           
             ],
+
+            map: {
+                x: "52",
+                y: "68" ,
+            },
+                                 
             info: {
                 position: {
                     x: 0,
@@ -274,6 +342,12 @@ export const models = {
                 },
           
             ],
+
+                 map: {
+                x: "52",
+                y: "57" ,
+            },
+                 
             info: {
                 position: {
                     x: 0,
@@ -305,6 +379,13 @@ export const models = {
                 },
           
             ],
+
+                     map: {
+                x: "52",
+                y: "46" ,
+            },
+
+                     
             info: {
                 position: {
                     x: 0,
@@ -333,6 +414,11 @@ export const models = {
                 },
           
             ],
+
+                    map: {
+                x: "52",
+                y: "35" ,
+            },
             info: {
                 position: {
                     x: 0,
@@ -358,6 +444,13 @@ export const models = {
                 },
           
             ],
+
+                    map: {
+                x: "41",
+                y: "68" ,
+            },
+
+                    
             info: {
                 position: {
                     x: 0,
@@ -386,6 +479,13 @@ export const models = {
                 },
           
             ],
+
+                       map: {
+                x: "41",
+                y: "57" ,
+            },
+
+                       
             info: {
                 position: {
                     x: 0,
@@ -414,6 +514,14 @@ export const models = {
                 },
           
             ],
+
+                       map: {
+                x: "41",
+                y: "46" ,
+            },
+
+
+                       
             info: {
                 position: {
                     x: 0,
@@ -439,6 +547,11 @@ export const models = {
                 },
           
             ],
+                       map: {
+                x: "41",
+                y: "35" ,
+            },
+
             info: {
                 position: {
                     x: 0,

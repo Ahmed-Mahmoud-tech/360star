@@ -68,3 +68,50 @@ button.action {
   background: #fffc6d;
   border-radius: 5px;
 }
+
+.map {
+  position: fixed;
+  right: 15px;
+  z-index: 1000;
+  top: 50px;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+
+.map img.mapImage {
+    width: 300px;
+    max-width: 95vw;
+}
+
+.pinIcon {
+  position: absolute;
+  width: 10px;
+  background: #fffc6d;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.pinIcon.active {
+  outline: 2px solid #ffffff;
+  box-shadow: 0 0 5px 5px white;
+  background: #ff6c00;
+}
+
+.mapIcon {
+  position: fixed;
+  top: 10px;
+  z-index: 1000;
+  width: 35px;
+  right: 15px;
+  height: 35px;
+  background: white;
+  padding: 7px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px 3px white;
+  cursor: pointer;
+}
+
+.mapIcon.active{
+  background-color: #fffc6d;
+}

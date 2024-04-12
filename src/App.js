@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import clickIcon from './assets/images/click.png';
 import { models } from './objects';
 import StartingPopUp from './components/StartingPopUp/StartingPopUp';
+import mapIcon from './assets/images/mapIcon.png'
+import map from './assets/images/map.png'
 const currentModel = 'star';
-
 
 const points = models[currentModel].points
 
 function App() {
    
   const [startingPopUp, setStartingPopUp] = useState(true)
+  const [mapStatus, setMapStatus] = useState(false)
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 const [currentPoint, setCurrentPoint] = useState(0)
@@ -110,7 +112,17 @@ const [isFirstSky, setIsFirstSky] = useState(true)
   return (
     <>
       {!isMobile && startingPopUp && <StartingPopUp setStartingPopUp={setStartingPopUp} />}
-      {!isMobile && <span className='cross' style={{backgroundImage: `url(${clickIcon}`}}>  </span>}
+      {!isMobile && <span className='cross' style={{ backgroundImage: `url(${clickIcon}` }}>  </span>}
+      {map && <span className= {`mapIcon ${mapStatus && 'active'}`} onClick={()=> setMapStatus(!mapStatus)} ><img src={mapIcon} alt="mapIcon" /></span> }
+      {mapStatus && <div className='map'>
+        <img src={map} alt="map" className='mapImage' />
+
+        <div className="pins">
+          {models[currentModel].points.map((point, index) => {
+             return  <span key={index}  style={{ right: point.map.x + '%' , top: point.map.y + '%' }} className={`pinIcon ${ index == currentPoint && 'active'}`} onClick={()=> {move(index)}}></span>
+           })}
+        </div>
+      </div>}
       <a-scene cursor="rayOrigin: mouse" >
  
         {/* <a-camera wasd-controls='acceleration=1' id="camera"  rotation="0 0 0" reverseMouseDrag="true" pointerLockEnabled="true"></a-camera> */}
