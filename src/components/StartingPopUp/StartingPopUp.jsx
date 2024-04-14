@@ -8,6 +8,7 @@ export default function StartingPopUp({ setStartingPopUp }) {
       setStartingPopUp(false)
   }
   return (
+      <div className='overlay'>
       <div className='popUpContainer'>
           <div className="message">
               To unlock the mouse double-click, please 
@@ -15,6 +16,7 @@ export default function StartingPopUp({ setStartingPopUp }) {
           <button className="action" onClick={closePopUp}>
               Got it
           </button>
+    </div>
     </div>
   )
 }

@@ -115,3 +115,13 @@ button.action {
 .mapIcon.active{
   background-color: #fffc6d;
 }
+
+.overlay {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: #000000a6;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+}

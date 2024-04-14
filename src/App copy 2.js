@@ -26,6 +26,36 @@ function App() {
     }, 500);
 }
 
+  
+        // Define the animation function
+      function animateScale(targetElement, targetScale, duration) {
+        var initialScale = targetElement.getAttribute('scale');
+        var startTime = performance.now();
+
+        function updateScale(currentTime) {
+          var elapsed = currentTime - startTime;
+          var progress = elapsed / duration;
+
+          if (progress >= 1) {
+            // Animation complete
+            targetElement.setAttribute('scale', targetScale.x + ' ' + targetScale.y + ' ' + targetScale.z);
+          } else {
+            // Animation still in progress
+            var currentScale = {
+              x: initialScale.x + (targetScale.x - initialScale.x) * progress,
+              y: initialScale.y + (targetScale.y - initialScale.y) * progress,
+              z: initialScale.z + (targetScale.z - initialScale.z) * progress
+            };
+            targetElement.setAttribute('scale', currentScale.x + ' ' + currentScale.y + ' ' + currentScale.z);
+            requestAnimationFrame(updateScale);
+          }
+        }
+
+        requestAnimationFrame(updateScale);
+      }
+
+
+  
   const  changeSky = (current, next) => {
     document.querySelector(next).setAttribute('animation', {
       property: 'material.opacity',
@@ -46,6 +76,23 @@ function App() {
 
     document.querySelector(current).setAttribute('radius',  '100')
     document.querySelector(next).setAttribute('radius', '101')
+
+
+
+
+    /**************************************************** */
+ 
+
+      // Define the target scale
+      var targetScale = { x: 2, y: 2, z: 2 };
+
+      // Define the animation duration in milliseconds
+      var duration = 3000;
+
+
+      // Call the animation function
+    // animateScale(document.querySelector(current), targetScale, duration);
+
 
   }
 
@@ -93,10 +140,13 @@ function App() {
     if (index >= 0) move(index)
   }
 
+
+
   
 const scene = useRef()
 
   const clickMovement = () => { 
+    console.log("11111111111111111");
 
     const yRotation = ((document.querySelector('a-camera').getAttribute('rotation').y % 360) + 360) % 360
     beforeMove(yRotation, points[currentPoint].neighbors )
@@ -162,10 +212,12 @@ const scene = useRef()
           side="double"
           id="fSky"
           material=" transparent: false; opacity: 1;"
-           src={points[isFirstSky ? currentPoint : oldPoint].image}
+          src={points[isFirstSky ? currentPoint : oldPoint].image}
+          scale="1 1 1"
           >
         </a-sky>
         <a-sky
+            scale="1 1 1"
           radius="100"
           rotation="0 270 0"
           position="0 0 0"
