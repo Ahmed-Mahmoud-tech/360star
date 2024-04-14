@@ -111,7 +111,7 @@ button.action {
   box-shadow: 0 0 5px 3px white;
   cursor: pointer;
 }
-
+ 
 .mapIcon.active{
   background-color: #fffc6d;
 }
