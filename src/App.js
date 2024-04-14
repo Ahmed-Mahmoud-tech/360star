@@ -91,13 +91,12 @@ function App() {
     console.log(yRotation, neighbors, index, small, big );
 
     if (index >= 0) move(index)
-
-
   }
 
 const scene = useRef()
 
   const clickMovement = () => { 
+    console.log("11111111111111111");
 
     const yRotation = ((document.querySelector('a-camera').getAttribute('rotation').y % 360) + 360) % 360
     beforeMove(yRotation, points[currentPoint].neighbors )
@@ -105,11 +104,11 @@ const scene = useRef()
 
   useEffect(() => {
     
-        scene.current.addEventListener('click', clickMovement) 
+        scene.current.addEventListener(isMobile ? 'touchstart' : 'click', clickMovement) 
         scene.current.addEventListener('dblclick', disablePointerLock)
-        if (document.pointerLockElement === null) { 
-          scene.current.addEventListener('click', clickMovement)
-        }
+        // if (document.pointerLockElement === null) { 
+        //   scene.current.addEventListener('click', clickMovement)
+        // }
 
      /***************** */
 

@@ -10,7 +10,7 @@ export default function StartingPopUp({ setStartingPopUp }) {
   return (
       <div className='popUpContainer'>
           <div className="message">
-              To unlock the mouse double-click twice, please 
+              To unlock the mouse double-click, please 
           </div>
           <button className="action" onClick={closePopUp}>
               Got it
