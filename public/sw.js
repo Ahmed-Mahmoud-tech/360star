@@ -10,6 +10,9 @@ self.addEventListener('install', event => {
         '/index.html',
         '/static/js/bundle.js',
         '/static/css/main.css',
+        '/assets/images/star/*',
+        '/assets/images/star/09.png',
+        
 
       ]))
       .catch(error => console.error('Cache open failed:', error))
