@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 
-const CACHE_NAME = 'my-react-app-cache';
+const CACHE_NAME = 'my-react-app-cache1';
 
 self.addEventListener('install', event => {
   event.waitUntil(
@@ -33,10 +33,10 @@ self.addEventListener('fetch', event => {
 
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(cacheNames => {
+    caches.keys().then(cacheItems => {
       return Promise.all(
-        cacheNames.filter(cacheName => {
-          return cacheName.startsWith('my-react-app-') && cacheName !== CACHE_NAME;
+        cacheItems.filter(cacheItem => {
+          return cacheItem !== CACHE_NAME;
         }).map(cacheName => {
           return caches.delete(cacheName);
         })
