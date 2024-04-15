@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 
-const CACHE_NAME = 'my-react-app-cache3';
+const CACHE_NAME = 'my-react-app-cache4';
 
 self.addEventListener('install', event => {
   console.log("object0");
@@ -19,18 +19,18 @@ self.addEventListener('install', event => {
   );
 });
 
-// self.addEventListener('fetch', event => {
-//   console.log("=> fetch");
-//   event.respondWith(
-//     caches.match(event.request)
-//       .then(response => {
-//         if (response) {
-//           return response;
-//         }
-//         return fetch(event.request);
-//       })
-//   );
-// });
+self.addEventListener('fetch', event => {
+  console.log("=> fetch");
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request);
+      })
+  );
+});
 
 self.addEventListener('activate', event => {
   event.waitUntil(
@@ -48,17 +48,17 @@ self.addEventListener('activate', event => {
 
 
 
-self.addEventListener('fetch', e => {
-  console.log("=> fetch");
-  e.respondWith(
-    fetch(e.request)
-      .then(res => {
-        const resClone = res.clone();
-        caches
-          .open(CACHE_NAME).then(cache => {
-            cache.put(e.request, resClone)
-          })
-        return res;
-      })
-  );
-});
+// self.addEventListener('fetch', e => {
+//   console.log("=> fetch");
+//   e.respondWith(
+//     fetch(e.request)
+//       .then(res => {
+//         const resClone = res.clone();
+//         caches
+//           .open(CACHE_NAME).then(cache => {
+//             cache.put(e.request, resClone)
+//           })
+//         return res;
+//       })
+//   );
+// });
