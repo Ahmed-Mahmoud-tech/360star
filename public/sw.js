@@ -3,6 +3,7 @@
 const CACHE_NAME = 'my-react-app-cache1';
 
 self.addEventListener('install', event => {
+  console.log("object0");
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll([
@@ -10,7 +11,6 @@ self.addEventListener('install', event => {
         '/index.html',
         '/static/js/bundle.js',
         '/static/css/main.css',
-        '/assets/images/star/*',
         '/assets/images/star/09.png',
         
 
