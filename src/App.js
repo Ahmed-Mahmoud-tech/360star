@@ -146,28 +146,11 @@ const scene = useRef()
        }
      
    }, [currentPoint, currentPointTimeGapStatus])
-   
-  useEffect(() => {
-
-    document.addEventListener('DOMContentLoaded', function() {
-      const images = [];
-  
-           // Preload each image
-           for (var i = 0; i < points.length; i++) {
-               images[i] = new Image();
-               images[i].src = points[i].image;
-           }
-      
-      setPointsImages(images);
-    // Your code here
-    });
     
-    
-    // console.log(images);
-  }, [])
   
   return (
     <>
+ 
       {!isMobile && startingPopUp && <StartingPopUp setStartingPopUp={setStartingPopUp} />}
       {!isMobile && <span className='cross' style={{ backgroundImage: `url(${clickIcon}` }}>  </span>}
       {map && <span className= {`mapIcon ${mapStatus && 'active'}`} onClick={()=> setMapStatus(!mapStatus)} ><img src={mapIcon} alt="mapIcon" /></span> }
@@ -181,12 +164,21 @@ const scene = useRef()
         </div>
       </div>}
       <a-scene ref={scene}>
+
+ 
+      
+        <a-assets>
+          {points.map((point, index) => (
+            <img src={point.image} alt={`point-${index}`} id={`point-${index}`} />
+          ))}
+        </a-assets>
+        
       {/* <a-scene cursor="rayOrigin: mouse" ref={scene}> */}
          <a-camera look-controls="pointerLockEnabled:true;magicWindowTrackingEnabled:true;enabled:true" wasd-controls='acceleration=1;' reverseMouseDrag="true" id="camera" >
               {/* <a-entity  cursor="click:true;"  position="0 0 -1"  geometry="primitive: ring; radiusInner: 0.025; radiusOuter: 0.03" material=" shader:flat; opacity:0" raycaster="object: .dinosaurmodel"></a-entity> */}
         </a-camera>
         {/* <a-camera look-controls="reverseMouseDrag:true" wasd-controls='acceleration=1' reverseMouseDrag="true"  id="camera" ></a-camera> */}
-
+ 
         <a-sky
           radius="100"
           rotation="0 270 0"
@@ -194,7 +186,7 @@ const scene = useRef()
           side="double"
           id="fSky"
           material=" transparent: false; opacity: 1;"
-           src={pointsImages[isFirstSky ? currentPoint : oldPoint] || points[isFirstSky ? currentPoint : oldPoint].image}
+           src={`#point-${ isFirstSky ? currentPoint : oldPoint }` }
           >
         </a-sky>
         <a-sky
@@ -204,7 +196,7 @@ const scene = useRef()
           side="double"
           id="fSky2"
           material=" transparent: false; opacity: 0;"
-          src={pointsImages[isFirstSky ? oldPoint : currentPoint] || points[isFirstSky ? oldPoint : currentPoint].image}
+          src={`#point-${ isFirstSky ? oldPoint : currentPoint }` }
         > 
         </a-sky>
    
