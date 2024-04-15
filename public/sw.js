@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 
-const CACHE_NAME = 'my-react-app-cache4';
+const CACHE_NAME = 'my-react-app-cache5';
 
 self.addEventListener('install', event => {
   console.log("object0");
