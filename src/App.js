@@ -9,8 +9,9 @@ const currentModel = 'star';
 const points = models[currentModel].points
 
 function App() {
-
-
+ 
+    const [pointsImages, setPointsImages] = useState([])
+  
   if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
@@ -147,13 +148,20 @@ const scene = useRef()
    }, [currentPoint, currentPointTimeGapStatus])
    
   useEffect(() => {
-       const images = [];
 
-            // Preload each image
-            for (var i = 0; i < points.length; i++) {
-                images[i] = new Image();
-                images[i].src = points[i].image;
-            }
+    document.addEventListener('DOMContentLoaded', function() {
+      const images = [];
+  
+           // Preload each image
+           for (var i = 0; i < points.length; i++) {
+               images[i] = new Image();
+               images[i].src = points[i].image;
+           }
+      
+      setPointsImages(images);
+    // Your code here
+    });
+    
     
     // console.log(images);
   }, [])
@@ -186,7 +194,7 @@ const scene = useRef()
           side="double"
           id="fSky"
           material=" transparent: false; opacity: 1;"
-           src={points[isFirstSky ? currentPoint : oldPoint].image}
+           src={pointsImages[isFirstSky ? currentPoint : oldPoint] || points[isFirstSky ? currentPoint : oldPoint].image}
           >
         </a-sky>
         <a-sky
@@ -196,7 +204,7 @@ const scene = useRef()
           side="double"
           id="fSky2"
           material=" transparent: false; opacity: 0;"
-          src={points[isFirstSky ? oldPoint : currentPoint].image}
+          src={pointsImages[isFirstSky ? oldPoint : currentPoint] || points[isFirstSky ? oldPoint : currentPoint].image}
         > 
         </a-sky>
    
