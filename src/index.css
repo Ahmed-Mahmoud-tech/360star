@@ -125,3 +125,23 @@ button.action {
   left: 0;
   z-index: 10000;
 }
+
+
+
+
+footer {
+  position: fixed;
+  z-index: 1000;
+  bottom: 0;
+  width: 100vw;
+  text-align: center;
+  font-size: 14px;
+  padding: 10px;
+  color: white;
+  text-shadow: 0 0 5px #fff100;
+}
+
+footer a{
+  text-decoration: none;
+    color: wheat;
+}

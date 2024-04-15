@@ -234,7 +234,9 @@ const scene = useRef()
       </a-scene>
  
    
-
+      <footer>
+        Powered by <a href="https://virtualscene.tech" target="_blank" rel="noreferrer" >virtual Scene</a> 
+</footer>
     </>
   );
 }
