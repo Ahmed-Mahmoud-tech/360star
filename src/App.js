@@ -146,7 +146,18 @@ const scene = useRef()
      
    }, [currentPoint, currentPointTimeGapStatus])
    
-     
+  useEffect(() => {
+       const images = [];
+
+            // Preload each image
+            for (var i = 0; i < points.length; i++) {
+                images[i] = new Image();
+                images[i].src = points[i].image;
+            }
+    
+    // console.log(images);
+  }, [])
+  
   return (
     <>
       {!isMobile && startingPopUp && <StartingPopUp setStartingPopUp={setStartingPopUp} />}
