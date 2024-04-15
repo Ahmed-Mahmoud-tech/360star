@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 
-const CACHE_NAME = 'my-react-app-cache1';
+const CACHE_NAME = 'my-react-app-cache2';
 
 self.addEventListener('install', event => {
   console.log("object0");
@@ -20,6 +20,7 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('fetch', event => {
+  console.log("=> fetch");
   event.respondWith(
     caches.match(event.request)
       .then(response => {
