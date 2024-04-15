@@ -3,7 +3,7 @@ import clickIcon from './assets/images/click.png';
 import { models } from './objects';
 import StartingPopUp from './components/StartingPopUp/StartingPopUp';
 import mapIcon from './assets/images/mapIcon.png'
-import map from './assets/images/map.png'
+import map from './assets/images/map.webp'
 const currentModel = 'star';
 
 const points = models[currentModel].points
@@ -147,6 +147,11 @@ const scene = useRef()
      
    }, [currentPoint, currentPointTimeGapStatus])
     
+  useEffect(() => {
+    setTimeout(() => {
+      
+    }, 1000);
+  }, [])
   
   return (
     <>

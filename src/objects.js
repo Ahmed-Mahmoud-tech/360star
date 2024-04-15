@@ -2,7 +2,7 @@ export const models = {
     star: {
     points: [
         {
-            image: process.env.PUBLIC_URL + '/assets/images/star/01.png', neighbors: [
+            image: process.env.PUBLIC_URL + '/assets/images/star/01.webp', neighbors: [
                 {
                     degree: 0,
                     imageIndex: 1
@@ -30,7 +30,7 @@ export const models = {
             }
         },
         {
-            image: process.env.PUBLIC_URL + '/assets/images/star/02.png',
+            image: process.env.PUBLIC_URL + '/assets/images/star/02.webp',
             neighbors: [
                 {
                     degree: 0,
@@ -67,7 +67,7 @@ export const models = {
             }
         },
         {
-            image: process.env.PUBLIC_URL + '/assets/images/star/03.png',
+            image: process.env.PUBLIC_URL + '/assets/images/star/03.webp',
             neighbors: [
                 {
                     degree: 0,
@@ -101,7 +101,7 @@ export const models = {
             }
         },
         {
-            image: process.env.PUBLIC_URL + '/assets/images/star/04.png',
+            image: process.env.PUBLIC_URL + '/assets/images/star/04.webp',
             neighbors: [
       
                 {
@@ -136,7 +136,7 @@ export const models = {
             }
         },
         {
-            image: process.env.PUBLIC_URL + '/assets/images/star/05.png',
+            image: process.env.PUBLIC_URL + '/assets/images/star/05.webp',
             neighbors: [
                 {
                     degree: 0,
@@ -174,7 +174,7 @@ export const models = {
         },
    
         {
-            image: process.env.PUBLIC_URL + '/assets/images/star/06.png',
+            image: process.env.PUBLIC_URL + '/assets/images/star/06.webp',
             neighbors: [
                 {
                     degree: 0,
@@ -213,7 +213,7 @@ export const models = {
             }
         },
         {
-            image: process.env.PUBLIC_URL + '/assets/images/star/07.png',
+            image: process.env.PUBLIC_URL + '/assets/images/star/07.webp',
             neighbors: [
                 {
                     degree: 0,
@@ -253,7 +253,7 @@ export const models = {
         },
 
         {
-            image: process.env.PUBLIC_URL + '/assets/images/star/08.png',
+            image: process.env.PUBLIC_URL + '/assets/images/star/08.webp',
             neighbors: [
       
                 {
@@ -288,7 +288,7 @@ export const models = {
         },
       
         {
-            image: process.env.PUBLIC_URL + '/assets/images/star/09.png',
+            image: process.env.PUBLIC_URL + '/assets/images/star/09.webp',
             neighbors: [
                 {
                     degree: 0,
@@ -322,7 +322,7 @@ export const models = {
             }
         },
         {
-            image: process.env.PUBLIC_URL + '/assets/images/star/10.png',
+            image: process.env.PUBLIC_URL + '/assets/images/star/10.webp',
             neighbors: [
                 {
                     degree: 0,
@@ -359,7 +359,7 @@ export const models = {
             }
         },
         {
-            image: process.env.PUBLIC_URL + '/assets/images/star/11.png',
+            image: process.env.PUBLIC_URL + '/assets/images/star/11.webp',
             neighbors: [
                 {
                     degree: 0,
@@ -397,7 +397,7 @@ export const models = {
             }
         },
         {
-            image: process.env.PUBLIC_URL + '/assets/images/star/12.png',
+            image: process.env.PUBLIC_URL + '/assets/images/star/12.webp',
             neighbors: [
      
                 {
@@ -430,7 +430,7 @@ export const models = {
             }
         },
         {
-            image: process.env.PUBLIC_URL + '/assets/images/star/13.png',
+            image: process.env.PUBLIC_URL + '/assets/images/star/13.webp',
             neighbors: [
                 {
                     degree: 0,
@@ -462,7 +462,7 @@ export const models = {
             }
         },
         {
-            image: process.env.PUBLIC_URL + '/assets/images/star/14.png',
+            image: process.env.PUBLIC_URL + '/assets/images/star/14.webp',
             neighbors: [
                 {
                     degree: 0,
@@ -497,7 +497,7 @@ export const models = {
             }
         },
         {
-            image: process.env.PUBLIC_URL + '/assets/images/star/15.png',
+            image: process.env.PUBLIC_URL + '/assets/images/star/15.webp',
             neighbors: [
                 {
                     degree: 0,
@@ -533,7 +533,7 @@ export const models = {
             }
         },
         {
-            image: process.env.PUBLIC_URL + '/assets/images/star/16.png',
+            image: process.env.PUBLIC_URL + '/assets/images/star/16.webp',
             neighbors: [
     
     
