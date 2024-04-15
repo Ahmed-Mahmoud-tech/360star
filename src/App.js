@@ -178,8 +178,10 @@ const scene = useRef()
               {/* <a-entity  cursor="click:true;"  position="0 0 -1"  geometry="primitive: ring; radiusInner: 0.025; radiusOuter: 0.03" material=" shader:flat; opacity:0" raycaster="object: .dinosaurmodel"></a-entity> */}
         </a-camera>
         {/* <a-camera look-controls="reverseMouseDrag:true" wasd-controls='acceleration=1' reverseMouseDrag="true"  id="camera" ></a-camera> */}
- 
-        <a-sky
+
+  
+
+            <a-sky
           radius="100"
           rotation="0 270 0"
           position="0 0 0"
@@ -199,6 +201,16 @@ const scene = useRef()
           src={`#point-${ isFirstSky ? oldPoint : currentPoint }` }
         > 
         </a-sky>
+        {/* <a-sky
+          radius="100"
+          rotation="0 270 0"
+          position="0 0 0"
+          side="double"
+          id="fSky2"
+          material=" transparent: false; opacity: 0;"
+          src={pointsImages[isFirstSky ? oldPoint : currentPoint]?.src || points[isFirstSky ? oldPoint : currentPoint].image}
+        > 
+        </a-sky> */}
    
         {points[currentPoint].neighbors.map((neighbor, index) => 
           <a-entity key={Math.random()} position="0 -5 0" rotation={`0 ${neighbor.degree} 0`} className="" >
