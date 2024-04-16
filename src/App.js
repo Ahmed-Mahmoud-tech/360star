@@ -4,13 +4,14 @@ import { models } from './objects';
 import StartingPopUp from './components/StartingPopUp/StartingPopUp';
 import mapIcon from './assets/images/mapIcon.png'
 import map from './assets/images/map.webp'
+import Loading from './components/Loading/Loading';
 const currentModel = 'star';
 
 const points = models[currentModel].points
 
 function App() {
  
-    const [pointsImages, setPointsImages] = useState([])
+    const [loadingStatus, setLoadingStatus] = useState(true)
   
   if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -148,9 +149,7 @@ const scene = useRef()
    }, [currentPoint, currentPointTimeGapStatus])
     
   useEffect(() => {
-    setTimeout(() => {
-      
-    }, 1000);
+    setLoadingStatus(false)
   }, [])
   
   return (
@@ -206,16 +205,7 @@ const scene = useRef()
           src={`#point-${ isFirstSky ? oldPoint : currentPoint }` }
         > 
         </a-sky>
-        {/* <a-sky
-          radius="100"
-          rotation="0 270 0"
-          position="0 0 0"
-          side="double"
-          id="fSky2"
-          material=" transparent: false; opacity: 0;"
-          src={pointsImages[isFirstSky ? oldPoint : currentPoint]?.src || points[isFirstSky ? oldPoint : currentPoint].image}
-        > 
-        </a-sky> */}
+   
    
         {points[currentPoint].neighbors.map((neighbor, index) => 
           <a-entity key={Math.random()} position="0 -5 0" rotation={`0 ${neighbor.degree} 0`} className="" >
@@ -236,7 +226,9 @@ const scene = useRef()
    
       <footer>
         Powered by <a href="https://virtualscene.tech" target="_blank" rel="noreferrer" >virtual Scene</a> 
-</footer>
+      </footer>
+      
+      {loadingStatus && <Loading />}
     </>
   );
 }

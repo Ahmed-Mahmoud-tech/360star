@@ -145,3 +145,425 @@ footer a{
   text-decoration: none;
     color: wheat;
 }
+
+
+
+/********************  loading  *************************/
+/*  
+.cube:nth-child(1),
+.cube:nth-child(1) div {
+  z-index: 1;
+  animation-delay: 0.0833333333s;
+}
+
+.cube:nth-child(2),
+.cube:nth-child(2) div {
+  z-index: 2;
+  animation-delay: 0.1666666667s;
+}
+
+.cube:nth-child(3),
+.cube:nth-child(3) div {
+  z-index: 3;
+  animation-delay: 0.25s;
+}
+
+.cube:nth-child(4),
+.cube:nth-child(4) div {
+  z-index: 4;
+  animation-delay: 0.3333333333s;
+}
+
+.cube:nth-child(5),
+.cube:nth-child(5) div {
+  z-index: 5;
+  animation-delay: 0.4166666667s;
+}
+
+.cube:nth-child(6),
+.cube:nth-child(6) div {
+  z-index: 6;
+  animation-delay: 0.5s;
+}
+
+.cube:nth-child(7),
+.cube:nth-child(7) div {
+  z-index: 7;
+  animation-delay: 0.5833333333s;
+}
+
+.cube:nth-child(8),
+.cube:nth-child(8) div {
+  z-index: 8;
+  animation-delay: 0.6666666667s;
+}
+
+
+#vignette {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 4;
+  background-image: -webkit-radial-gradient(50% 50%, ellipse cover, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+  background-image: -moz-radial-gradient(50% 50%, ellipse cover, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+}
+
+#pos {
+  width: 304px;
+  margin: 0 auto;
+}
+
+
+.LoadingText {
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 25px;
+  text-shadow: 0 0 5px #000, 0 0 5px #fff;
+}
+
+#loadingContainer {
+  width: 100vw;
+  perspective: 2200px;
+  padding: 20px 60px;
+  position: relative;
+  display: table-cell;
+  vertical-align: middle;
+  height: 100vh;
+  background: linear-gradient(45deg, #222222, #525252);
+  z-index: 10000;
+}
+
+.cube {
+  width: 30px;
+  height: 150px;
+  position: relative;
+  margin-right: 8px;
+  float: left;
+  transform-style: preserve-3d;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  animation: animCube;
+   animation-iteration-count: infinite;
+}
+
+.cube div {
+  position: absolute;
+  display: block;
+  width: 30px;
+  height: 150px;
+}
+
+.cube .center {
+  width: 30px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3), inset 0 1px rgba(255, 255, 255, 0.05);
+  animation: animCenter;
+  animation-iteration-count: infinite;
+}
+
+.cube .bottom {
+  width: 30px;
+  height: 10px;
+  bottom: 0;
+  transform: rotateX(90deg);
+  transform-origin: center bottom;
+  animation: animBottom;
+  animation-iteration-count: infinite;
+}
+
+.cube .left {
+  left: 0;
+  transform: rotateY(90deg);
+  transform-origin: left center;
+  animation: animSide;
+  animation-iteration-count: infinite;
+}
+
+.cube .right {
+  right: 0;
+  transform: rotateY(-90deg);
+  transform-origin: right center;
+  animation: animSide;
+  animation-iteration-count: infinite;
+}
+
+.cube .left,
+.cube .center,
+.cube .right,
+.cube .bottom,
+.cube {
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+}
+
+.left,
+.right {
+  background-color: #2b2830;
+  background-image: linear-gradient(top, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+}
+
+.center {
+  background-color: #2b2830;
+  background-image: linear-gradient(top, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+}
+
+.bottom {
+  background-color: #1f1d23;
+  background-image: linear-gradient(bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+}
+
+@keyframes animCube {
+  30% {
+    transform: translateZ(150px) translatex(0) translateY(0) rotatex(3deg) rotatey(0deg) rotateZ(0deg);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), 0 12px 20px 1px rgba(0, 0, 0, 0.5);
+  }
+
+  100% {
+    transform: translateZ(0px) rotatez(0deg);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+@keyframes animSide {
+  30% {
+    width: 100px;
+    background-color: #1d1c1f;
+  }
+
+  95% {
+    width: 10px;
+  }
+}
+
+@keyframes animBottom {
+  30% {
+    height: 100px;
+  }
+
+  95% {
+    height: 10px;
+  }
+}
+
+@keyframes animCenter
+
+   {
+  20% {
+    background-color: #6a6371;
+    box-shadow: 0 0 3px rgba(255, 255, 255, 0.15), inset 0 1px rgba(255, 255, 255, 0.5);
+  }
+
+  65% {
+    box-shadow: 0 0 3px rgba(255, 255, 255, 0), inset 0 1px rgba(255, 255, 255, 0.25);
+  }
+} */
+
+
+.loadingContainer {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  background: radial-gradient(#373737, black);
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  z-index: 10000;
+}
+
+
+.a {
+  position: relative;
+  font-size: 60px;
+  font-weight: 1000;
+  line-height: 80px;
+  margin: 3px;
+
+  text-shadow:
+    1px 1px 1px #777,
+    1px 2px 1px #777,
+    1px 3px 1px #777,
+    1px 4px 1px #777,
+    1px 5px 1px #777,
+    1px 6px 1px #777,
+    1px 7px 1px #777,
+    1px 8px 1px #777,
+    1px 9px 1px #777,
+    1px 10px 1px #777,
+
+    0px 22px 10px #aaa,
+    0px 25px 14px #bbb;
+
+  animation: load 3s infinite;
+  animation-delay: 0s;
+}
+
+.b {
+  position: relative;
+  font-size: 60px;
+  font-weight: 1000;
+  line-height: 80px;
+  margin: 3px;
+
+  text-shadow:
+    1px 1px 1px #777,
+    1px 2px 1px #777,
+    1px 3px 1px #777,
+    1px 4px 1px #777,
+    1px 5px 1px #777,
+    1px 6px 1px #777,
+    1px 7px 1px #777,
+    1px 8px 1px #777,
+    1px 9px 1px #777,
+    1px 10px 1px #777,
+
+    0px 22px 10px #aaa,
+    0px 25px 14px #bbb;
+
+  animation: load 3s infinite;
+  animation-delay: 0.285s;
+}
+
+.c {
+  position: relative;
+  font-size: 60px;
+  font-weight: 1000;
+  line-height: 80px;
+  margin: 3px;
+
+  text-shadow:
+    1px 1px 1px #777,
+    1px 2px 1px #777,
+    1px 3px 1px #777,
+    1px 4px 1px #777,
+    1px 5px 1px #777,
+    1px 6px 1px #777,
+    1px 7px 1px #777,
+    1px 8px 1px #777,
+    1px 9px 1px #777,
+    1px 10px 1px #777,
+
+    0px 22px 10px #aaa,
+    0px 25px 14px #bbb;
+
+  animation: load 3s infinite;
+  animation-delay: 0.57s;
+}
+
+.d {
+  position: relative;
+  font-size: 60px;
+  font-weight: 1000;
+  line-height: 80px;
+  margin: 3px;
+
+  text-shadow:
+    1px 1px 1px #777,
+    1px 2px 1px #777,
+    1px 3px 1px #777,
+    1px 4px 1px #777,
+    1px 5px 1px #777,
+    1px 6px 1px #777,
+    1px 7px 1px #777,
+    1px 8px 1px #777,
+    1px 9px 1px #777,
+    1px 10px 1px #777,
+
+    0px 22px 10px #aaa,
+    0px 25px 14px #bbb;
+
+  animation: load 3s infinite;
+  animation-delay: 0.855s;
+}
+
+.e {
+  position: relative;
+  font-size: 60px;
+  font-weight: 1000;
+  line-height: 80px;
+  margin: 3px;
+
+  text-shadow:
+    1px 1px 1px #777,
+    1px 2px 1px #777,
+    1px 3px 1px #777,
+    1px 4px 1px #777,
+    1px 5px 1px #777,
+    1px 6px 1px #777,
+    1px 7px 1px #777,
+    1px 8px 1px #777,
+    1px 9px 1px #777,
+    1px 10px 1px #777,
+
+    0px 22px 10px #aaa,
+    0px 25px 14px #bbb;
+
+  animation: load 3s infinite;
+  animation-delay: 1.14s;
+}
+
+.f {
+  position: relative;
+  font-size: 60px;
+  font-weight: 1000;
+  line-height: 80px;
+  margin: 3px;
+
+  text-shadow:
+    1px 1px 1px #777,
+    1px 2px 1px #777,
+    1px 3px 1px #777,
+    1px 4px 1px #777,
+    1px 5px 1px #777,
+    1px 6px 1px #777,
+    1px 7px 1px #777,
+    1px 8px 1px #777,
+    1px 9px 1px #777,
+    1px 10px 1px #777,
+
+    0px 22px 10px #aaa,
+    0px 25px 14px #bbb;
+
+  animation: load 3s infinite;
+  animation-delay: 1.425s;
+}
+
+.g {
+  position: relative;
+  font-size: 60px;
+  font-weight: 1000;
+  line-height: 80px;
+  margin: 3px;
+
+  text-shadow:
+    1px 1px 1px #777,
+    1px 2px 1px #777,
+    1px 3px 1px #777,
+    1px 4px 1px #777,
+    1px 5px 1px #777,
+    1px 6px 1px #777,
+    1px 7px 1px #777,
+    1px 8px 1px #777,
+    1px 9px 1px #777,
+    1px 10px 1px #777,
+
+    0px 22px 10px #aaa,
+    0px 25px 14px #bbb;
+
+  animation: load 3s infinite;
+  animation-delay: 1.71s;
+}
+
+@keyframes load {
+
+  0%,
+  100% {}
+
+  50% {
+    text-shadow: 0px 0px 0px;
+  }
+}
