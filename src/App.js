@@ -127,18 +127,18 @@ const scene = useRef()
 
      /***************** */
 
-    if ('Gyroscope' in window) {
-        let gyroscope = new window.Gyroscope({frequency: 60});
+    // if ('Gyroscope' in window) {
+    //     let gyroscope = new window.Gyroscope({frequency: 60});
 
-        // gyroscope.addEventListener('reading', e => {
-        //     console.log("Angular velocity along the X-axis " + gyroscope.x);
-        //     console.log("Angular velocity along the Y-axis " + gyroscope.y);
-        //     console.log("Angular velocity along the Z-axis " + gyroscope.z);
-        // });
-        gyroscope.start();
-    } else {
-        console.log("Gyroscope API is not supported in this browser.");
-    }
+    //     // gyroscope.addEventListener('reading', e => {
+    //     //     console.log("Angular velocity along the X-axis " + gyroscope.x);
+    //     //     console.log("Angular velocity along the Y-axis " + gyroscope.y);
+    //     //     console.log("Angular velocity along the Z-axis " + gyroscope.z);
+    //     // });
+    //     gyroscope.start();
+    // } else {
+    //     console.log("Gyroscope API is not supported in this browser.");
+    // }
 
     /***************************** */
      // Check if the device supports DeviceMotionEvent
