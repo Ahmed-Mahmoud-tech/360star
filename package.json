@@ -2,7 +2,7 @@
   "name": "new360",
   "version": "0.1.0",
   "private": true,
-  "homepage0000": "/tower",
+  "homepage": "/tower",
 
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
