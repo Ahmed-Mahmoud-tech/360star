@@ -246,7 +246,7 @@ function requestAndAddListeners() {
     <div onLoad={() =>
       setTimeout(() => {
         setLoadingStatus(false)
-      }, 1000)
+      }, 200)
     }>
 
        {loadingStatus && <Loading />}
