@@ -236,18 +236,14 @@ function requestAndAddListeners() {
      
    }, [currentPoint, currentPointTimeGapStatus])
     
-  // useEffect(() => {
-  //   document.addEventListener('DOMContentLoaded', function () { setLoadingStatus(false); alert("Please wait...") })
-
-  //   // window.onload = () => { setLoadingStatus(false) }
-  // }, [])
+  useEffect(() => {
+window.addEventListener('load', () => {
+  alert("page is loaded")
+})
+  }, [])
   
   return (
-    <body onLoad={() =>
-        setLoadingStatus(false)
-      // setTimeout(() => {
-      // }, 200)
-    }>
+    <body>
 
        {loadingStatus && <Loading />}
 
