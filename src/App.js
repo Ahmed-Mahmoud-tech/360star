@@ -243,7 +243,7 @@ function requestAndAddListeners() {
   // }, [])
   
   return (
-    <div onLoad={() =>
+    <body onLoad={() =>
         setLoadingStatus(false)
       // setTimeout(() => {
       // }, 200)
@@ -324,7 +324,7 @@ function requestAndAddListeners() {
         Powered by <a href="https://virtualscene.tech" target="_blank" rel="noreferrer" >virtual Scene</a> 
       </footer>
       
-      </div>
+      </bo>
   );
 }
 
