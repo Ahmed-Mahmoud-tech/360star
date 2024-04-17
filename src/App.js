@@ -188,6 +188,43 @@ if (window.DeviceMotionEvent) {
     console.log("DeviceOrientationEvent is not supported on this device.");
     }
     
+
+
+    function handleOrientation(event) {
+ const alpha = event.alpha;
+ const beta = event.beta;
+ const gamma = event.gamma;
+ // Handle orientation data
+}
+
+function handleMotion(event) {
+ const acceleration = event.acceleration;
+ const rotationRate = event.rotationRate;
+ // Handle motion data
+}
+
+function requestAndAddListeners() {
+ if (typeof DeviceMotionEvent.requestPermission === 'function') {
+    // Request permission for iOS 13+
+    DeviceMotionEvent.requestPermission()
+      .then(permissionState => {
+        if (permissionState === 'granted') {
+          window.addEventListener('deviceorientation', handleOrientation, true);
+          window.addEventListener('devicemotion', handleMotion, true);
+        } else {
+          console.error('Permission to access motion data was denied');
+        }
+      })
+      .catch(console.error);
+ } else {
+    // For non-iOS 13+ devices, add event listeners directly
+    window.addEventListener('deviceorientation', handleOrientation, true);
+    window.addEventListener('devicemotion', handleMotion, true);
+ }
+}
+
+// Call this function in response to a user action, e.g., a button click
+    requestAndAddListeners();
     
 
      /******************************** */
@@ -204,7 +241,8 @@ if (window.DeviceMotionEvent) {
   
   return (
     <>
- 
+       {loadingStatus && <Loading />}
+
       {!isMobile && startingPopUp && <StartingPopUp setStartingPopUp={setStartingPopUp} />}
       {!isMobile && <span className='cross' style={{ backgroundImage: `url(${clickIcon}` }}>  </span>}
       {map && <span className= {`mapIcon ${mapStatus && 'active'}`} onClick={()=> setMapStatus(!mapStatus)} ><img src={mapIcon} alt="mapIcon" /></span> }
@@ -278,7 +316,6 @@ if (window.DeviceMotionEvent) {
         Powered by <a href="https://virtualscene.tech" target="_blank" rel="noreferrer" >virtual Scene</a> 
       </footer>
       
-      {loadingStatus && <Loading />}
     </>
   );
 }

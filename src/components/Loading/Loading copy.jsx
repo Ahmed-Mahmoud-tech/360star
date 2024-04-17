@@ -4,63 +4,63 @@ function Loading() {
   return (
       <div>
  <div id="loadingContainer">
-          <div className='LoadingText'>Environment Loading</div>
+          <div classNameName='LoadingText'>Environment Loading</div>
   <div id="pos">
-    <div class="cube">
-      <div class="left"></div>
-      <div class="center"></div>
-      <div class="right"></div>
-      <div class="bottom"></div>
-      <div class="shadow"></div>
+    <div className="cube">
+      <div className="left"></div>
+      <div className="center"></div>
+      <div className="right"></div>
+      <div className="bottom"></div>
+      <div className="shadow"></div>
     </div>
-    <div class="cube">
-      <div class="left"></div>
-      <div class="center"></div>
-      <div class="right"></div>
-      <div class="bottom"></div>
-      <div class="shadow"></div>
+    <div className="cube">
+      <div className="left"></div>
+      <div className="center"></div>
+      <div className="right"></div>
+      <div className="bottom"></div>
+      <div className="shadow"></div>
     </div>
-    <div class="cube">
-      <div class="left"></div>
-      <div class="center"></div>
-      <div class="right"></div>
-      <div class="bottom"></div>
-      <div class="shadow"></div>
+    <div className="cube">
+      <div className="left"></div>
+      <div className="center"></div>
+      <div className="right"></div>
+      <div className="bottom"></div>
+      <div className="shadow"></div>
     </div>
-    <div class="cube">
-      <div class="left"></div>
-      <div class="center"></div>
-      <div class="right"></div>
-      <div class="bottom"></div>
-      <div class="shadow"></div>
+    <div className="cube">
+      <div className="left"></div>
+      <div className="center"></div>
+      <div className="right"></div>
+      <div className="bottom"></div>
+      <div className="shadow"></div>
     </div>
-    <div class="cube">
-      <div class="left"></div>
-      <div class="center"></div>
-      <div class="right"></div>
-      <div class="bottom"></div>
-      <div class="shadow"></div>
+    <div className="cube">
+      <div className="left"></div>
+      <div className="center"></div>
+      <div className="right"></div>
+      <div className="bottom"></div>
+      <div className="shadow"></div>
     </div>
-    <div class="cube">
-      <div class="left"></div>
-      <div class="center"></div>
-      <div class="right"></div>
-      <div class="bottom"></div>
-      <div class="shadow"></div>
+    <div className="cube">
+      <div className="left"></div>
+      <div className="center"></div>
+      <div className="right"></div>
+      <div className="bottom"></div>
+      <div className="shadow"></div>
     </div>
-    <div class="cube">
-      <div class="left"></div>
-      <div class="center"></div>
-      <div class="right"></div>
-      <div class="bottom"></div>
-      <div class="shadow"></div>
+    <div className="cube">
+      <div className="left"></div>
+      <div className="center"></div>
+      <div className="right"></div>
+      <div className="bottom"></div>
+      <div className="shadow"></div>
     </div>
-    <div class="cube">
-      <div class="left"></div>
-      <div class="center"></div>
-      <div class="right"></div>
-      <div class="bottom"></div>
-      <div class="shadow"></div>
+    <div className="cube">
+      <div className="left"></div>
+      <div className="center"></div>
+      <div className="right"></div>
+      <div className="bottom"></div>
+      <div className="shadow"></div>
     </div>
   </div>
 </div></div>
