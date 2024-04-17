@@ -166,6 +166,29 @@ if (window.DeviceMotionEvent) {
     // DeviceMotionEvent is not supported, handle the error
     console.log("DeviceMotionEvent is not supported on this device.");
 }
+    
+    
+    
+    if (window.DeviceOrientationEvent) {
+    // Define a function to handle device orientation events
+    function handleOrientation(event) {
+        // Extract rotation data from the event
+        var alpha = event.alpha; // rotation around the z-axis
+        var beta = event.beta;   // rotation around the x-axis
+        var gamma = event.gamma; // rotation around the y-axis
+
+        // Do something with the gyroscope data
+        console.log("Alpha:", alpha, "Beta:", beta, "Gamma:", gamma);
+    }
+
+    // Add an event listener for the device orientation event
+    window.addEventListener('deviceorientation', handleOrientation, false);
+} else {
+    // DeviceOrientationEvent is not supported, handle the error
+    console.log("DeviceOrientationEvent is not supported on this device.");
+    }
+    
+    
 
      /******************************** */
        return () => { 
