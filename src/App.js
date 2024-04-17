@@ -139,8 +139,35 @@ const scene = useRef()
     } else {
         console.log("Gyroscope API is not supported in this browser.");
     }
-     
-     
+
+    /***************************** */
+     // Check if the device supports DeviceMotionEvent
+if (window.DeviceMotionEvent) {
+    // Define a function to handle device motion events
+    function handleMotion(event) {
+        // Extract rotation rate data from the event
+        var rotationRate = event.rotationRate;
+
+        // Check if rotationRate is not null (available on some devices)
+        if (rotationRate) {
+            // Extract data for each axis (x, y, z)
+            var alpha = rotationRate.alpha; // rotation rate around the z-axis
+            var beta = rotationRate.beta;   // rotation rate around the x-axis
+            var gamma = rotationRate.gamma; // rotation rate around the y-axis
+
+            // Do something with the gyroscope data
+            console.log("Alpha:", alpha, "Beta:", beta, "Gamma:", gamma);
+        }
+    }
+
+    // Add an event listener for the device motion event
+    window.addEventListener('devicemotion', handleMotion, false);
+} else {
+    // DeviceMotionEvent is not supported, handle the error
+    console.log("DeviceMotionEvent is not supported on this device.");
+}
+
+     /******************************** */
        return () => { 
         scene.current?.removeEventListener('click', clickMovement)
         scene.current?.removeEventListener('dblclick', disablePointerLock)
