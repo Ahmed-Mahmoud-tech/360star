@@ -243,7 +243,11 @@ function requestAndAddListeners() {
   // }, [])
   
   return (
-    <div onLoad={()=>setLoadingStatus(false)}>
+    <div onLoad={() =>
+      setTimeout(() => {
+        setLoadingStatus(false)
+      }, 1000)
+    }>
 
        {loadingStatus && <Loading />}
 
