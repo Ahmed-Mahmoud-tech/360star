@@ -238,6 +238,7 @@ function requestAndAddListeners() {
    }, [currentPoint, currentPointTimeGapStatus])
     
   useEffect(() => {
+    
      window.onload = setLoadingStatus(false)
   }, [])
   
