@@ -243,7 +243,7 @@ window.addEventListener('load', () => {
   }, [])
   
   return (
-    <body>
+    <>
 
        {loadingStatus && <Loading />}
 
@@ -319,8 +319,7 @@ window.addEventListener('load', () => {
       <footer>
         Powered by <a href="https://virtualscene.tech" target="_blank" rel="noreferrer" >virtual Scene</a> 
       </footer>
-      
-      </bo>
+    </>
   );
 }
 
