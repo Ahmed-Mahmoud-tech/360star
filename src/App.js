@@ -238,7 +238,7 @@ function requestAndAddListeners() {
     
   useEffect(() => {
     
-     window.onload = setLoadingStatus(false)
+     window.onload = ()=> setLoadingStatus(false)
   }, [])
   
   return (
