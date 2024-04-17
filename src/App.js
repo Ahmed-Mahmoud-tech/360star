@@ -4,7 +4,6 @@ import { models } from './objects';
 import StartingPopUp from './components/StartingPopUp/StartingPopUp';
 import mapIcon from './assets/images/mapIcon.png'
 import map from './assets/images/map.webp'
-import { BrowserRouter } from "react-router-dom";
 
 import Loading from './components/Loading/Loading';
 const currentModel = 'star';
@@ -244,7 +243,6 @@ function requestAndAddListeners() {
   
   return (
     <>
-          <BrowserRouter >
 
        {loadingStatus && <Loading />}
 
@@ -321,7 +319,6 @@ function requestAndAddListeners() {
         Powered by <a href="https://virtualscene.tech" target="_blank" rel="noreferrer" >virtual Scene</a> 
       </footer>
       
-      </BrowserRouter>
       </>
   );
 }
