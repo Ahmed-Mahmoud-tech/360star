@@ -238,7 +238,7 @@ function requestAndAddListeners() {
     
   useEffect(() => {
 window.addEventListener('load', () => {
-  alert("page is loaded")
+   setLoadingStatus(false)
 })
   }, [])
   
