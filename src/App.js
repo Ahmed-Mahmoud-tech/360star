@@ -236,13 +236,14 @@ function requestAndAddListeners() {
      
    }, [currentPoint, currentPointTimeGapStatus])
     
-  useEffect(() => {
-    
-     window.onload = ()=> setLoadingStatus(false)
-  }, [])
+  // useEffect(() => {
+  //   document.addEventListener('DOMContentLoaded', function () { setLoadingStatus(false); alert("Please wait...") })
+
+  //   // window.onload = () => { setLoadingStatus(false) }
+  // }, [])
   
   return (
-    <>
+    <div onLoad={()=>setLoadingStatus(false)}>
 
        {loadingStatus && <Loading />}
 
@@ -319,7 +320,7 @@ function requestAndAddListeners() {
         Powered by <a href="https://virtualscene.tech" target="_blank" rel="noreferrer" >virtual Scene</a> 
       </footer>
       
-      </>
+      </div>
   );
 }
 
