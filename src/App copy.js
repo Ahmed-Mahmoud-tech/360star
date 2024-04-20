@@ -3,32 +3,46 @@ import clickIcon from './assets/images/click.png';
 import { models } from './objects';
 import StartingPopUp from './components/StartingPopUp/StartingPopUp';
 import mapIcon from './assets/images/mapIcon.png'
-import map from './assets/images/map.png'
+import map from './assets/images/map.webp'
+
+import Loading from './components/Loading/Loading';
 const currentModel = 'star';
 
 const points = models[currentModel].points
 
-// let currentPoint = 0;
-// const setCurrentPoint = (x) => { 
-//   currentPoint = x
-// }
-
 function App() {
+ 
+    const [loadingStatus, setLoadingStatus] = useState(true)
+  
+  if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/tower/sw.js')
+      .then(registration => {
+        console.log('Service Worker registered:', registration);
+      })
+      .catch(error => {
+        console.error('Service Worker registration failed:', error);
+      });
+  });
+}
    
   const [startingPopUp, setStartingPopUp] = useState(true)
   const [mapStatus, setMapStatus] = useState(false)
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const [currentPoint, setCurrentPoint] = useState(0)
+  const [oldPoint, setOldPoint] = useState(0)
+  const [isFirstSky, setIsFirstSky] = useState(true)
+  const [currentPointTimeGapStatus, setCurrentPointTimeGapStatus] = useState(true)
+   
 
-const [currentPoint, setCurrentPoint] = useState(0)
-const [oldPoint, setOldPoint] = useState(0)
-const [isFirstSky, setIsFirstSky] = useState(true)
-// const [toggleCursor, setToggleCursor] = useState(true)
-
-  // const images = [process.env.PUBLIC_URL + '/assets/images/1.jpg', process.env.PUBLIC_URL + '/assets/images/2.jpg', process.env.PUBLIC_URL + '/assets/images/3.jpg', process.env.PUBLIC_URL + '/assets/images/4.jpg', process.env.PUBLIC_URL + '/assets/images/5.jpg', process.env.PUBLIC_URL + '/assets/images/6.jpg', process.env.PUBLIC_URL + '/assets/images/7.jpg', process.env.PUBLIC_URL + '/assets/images/8.jpg', process.env.PUBLIC_URL + '/assets/images/9.jpg', process.env.PUBLIC_URL + '/assets/images/10.jpg', process.env.PUBLIC_URL + '/assets/images/11.jpg', process.env.PUBLIC_URL + '/assets/images/12.jpg', process.env.PUBLIC_URL + '/assets/images/13.jpg', process.env.PUBLIC_URL + '/assets/images/14.jpg', process.env.PUBLIC_URL + '/assets/images/15.jpg'];
+  const moveTimeGap = () => {
+    setCurrentPointTimeGapStatus(false);
+    setTimeout(() => {
+      setCurrentPointTimeGapStatus(true);
+    }, 500);
+}
 
   const  changeSky = (current, next) => {
-    // console.log(current, next,)
-    // if (oldPoint == 1) { setOldPoint(0); setCurrentPoint(1) } else { setOldPoint(1); setCurrentPoint(0) }
     document.querySelector(next).setAttribute('animation', {
       property: 'material.opacity',
       from: 0,
@@ -45,29 +59,23 @@ const [isFirstSky, setIsFirstSky] = useState(true)
         dur: 505,  // Duration of the animation in milliseconds
         easing: 'linear'
     })
- 
-    
-// document.querySelector("canvas").style.transform ="scale(1.2)"    
-// document.querySelector("canvas").style.transition ="0.1s"      
-//     setTimeout(() => {
-// document.querySelector("canvas").style.transform ="scale(1)"      
-// document.querySelector("canvas").style.transition ="0s"      
-//     }, 200);
+
     document.querySelector(current).setAttribute('radius',  '100')
     document.querySelector(next).setAttribute('radius', '101')
 
   }
 
-   const move = (index) => {
-   
-    setIsFirstSky(!isFirstSky);
-    isFirstSky ? changeSky('#fSky', '#fSky2') : changeSky('#fSky2', '#fSky')
-      console.log("newPoint", index);
-         setCurrentPoint(index)
-        setTimeout(() => {
-          setOldPoint(index)
-        }, 505);
- 
+  const move = (index) => {
+    console.log(currentPointTimeGapStatus, "currentPointTimeGapStatus");
+    if (currentPointTimeGapStatus) {
+      setIsFirstSky(!isFirstSky);
+     isFirstSky ? changeSky('#fSky', '#fSky2') : changeSky('#fSky2', '#fSky')
+     console.log("newPoint", index);
+     setCurrentPoint(index)
+     setTimeout(() => {
+       setOldPoint(index)
+      }, 505);
+      moveTimeGap()}
   }
   
    
@@ -76,104 +84,189 @@ const [isFirstSky, setIsFirstSky] = useState(true)
      document.exitPointerLock();
  }
 
-  
-  const getAngleBetween = (deg1, deg2) => {
-    // Calculate the raw difference between the degrees
-    let rawDifference = deg2 - deg1;
+  const beforeMove = (yRotation, neighbors, range = 70) => {
+    let index;
+    let smallestDegree = range + 1
+    const small = yRotation - (range / 2);
+    const big = (yRotation + (range / 2));
 
-    // Normalize the raw difference to be within the range [-180, 180]
-    while (rawDifference > 180) {
-        rawDifference -= 360;
-    }
-    while (rawDifference <= -180) {
-        rawDifference += 360;
-    }
+    neighbors.map((neighbor) => {
+      const smallIfDegree = (neighbor.degree - small + 360) % 360
+      const bigIfDegree = (big - neighbor.degree + 360) % 360
 
-    // Return the absolute value of the normalized difference
-    return Math.abs(rawDifference);
-  }
-
-  const findNearestPoint = (x, neighbors) => {
-  // Normalize x to be within the range [0, 360)
-  x = (x % 360 + 360) % 360;
-  
-  // Sort the neighbors array based on the degree values
-  neighbors.sort((a, b) => a.degree - b.degree);
-  
-  // Initialize variables to store the nearest degree and image index
-  let nearestDegree = neighbors[0].degree;
-  let nearestImageIndex = neighbors[0].imageIndex;
-  
-  // Loop through the neighbors array to find the nearest point
-  for (let i = 1; i < neighbors.length; i++) {
-    const prevDegree = neighbors[i - 1].degree;
-    const currDegree = neighbors[i].degree;
+      if (smallIfDegree < smallestDegree) {
+        index = neighbor.imageIndex;
+        smallestDegree = smallIfDegree;
+      }
+      if ( bigIfDegree < smallestDegree) {
+        smallestDegree = bigIfDegree;
+        index = neighbor.imageIndex
+      }
+    })
     
-    // Check if x is between the previous and current degrees
-    if (x >= prevDegree && x <= currDegree) {
-      // Determine the nearest degree based on the midpoint between the previous and current degrees
-      nearestDegree = Math.abs(x - prevDegree) < Math.abs(x - currDegree) ? prevDegree : currDegree;
-      nearestImageIndex = nearestDegree === prevDegree ? neighbors[i - 1].imageIndex : neighbors[i].imageIndex;
-      break;
-    }
-  }
-  
-  return { degree: nearestDegree, imageIndex: nearestImageIndex };
+    console.log(yRotation, neighbors, index, small, big );
+
+    if (index >= 0) move(index)
   }
 
-  const beforeMove = (yRotation, neighbors) => {
-    const nearest = findNearestPoint(yRotation, neighbors)
-    
-    // Return the first element (nearest neighbor) from the sorted array
-    if (getAngleBetween(yRotation, nearest.degree) < 70) {
-        // console.log(yRotation , nearest.degree, getAngleBetween(yRotation, nearest.degree) < 70, "in",  nearest.imageIndex);
-        move(nearest.imageIndex)
-    }
-  }
   
 const scene = useRef()
 
   const clickMovement = () => { 
-    console.log(startingPopUp, "startingPopUp");
+
     const yRotation = ((document.querySelector('a-camera').getAttribute('rotation').y % 360) + 360) % 360
     beforeMove(yRotation, points[currentPoint].neighbors )
   }
 
   useEffect(() => {
     
-        scene.current.addEventListener('click', ()=> console.log("000000"))
-        // scene.current.addEventListener('click', clickMovement) 
-        // scene.current.addEventListener('dblclick', disablePointerLock)
+        scene.current.addEventListener(isMobile ? 'touchstart' : 'click', clickMovement) 
+        scene.current.addEventListener('dblclick', disablePointerLock)
         // if (document.pointerLockElement === null) { 
         //   scene.current.addEventListener('click', clickMovement)
         // }
 
      /***************** */
 
-    if ('Gyroscope' in window) {
-        let gyroscope = new window.Gyroscope({frequency: 60});
+    // if ('Gyroscope' in window) {
+    //     let gyroscope = new window.Gyroscope({frequency: 60});
 
-        // gyroscope.addEventListener('reading', e => {
-        //     console.log("Angular velocity along the X-axis " + gyroscope.x);
-        //     console.log("Angular velocity along the Y-axis " + gyroscope.y);
-        //     console.log("Angular velocity along the Z-axis " + gyroscope.z);
-        // });
-        gyroscope.start();
-    } else {
-        console.log("Gyroscope API is not supported in this browser.");
+    //     // gyroscope.addEventListener('reading', e => {
+    //     //     console.log("Angular velocity along the X-axis " + gyroscope.x);
+    //     //     console.log("Angular velocity along the Y-axis " + gyroscope.y);
+    //     //     console.log("Angular velocity along the Z-axis " + gyroscope.z);
+    //     // });
+    //     gyroscope.start();
+    // } else {
+    //     console.log("Gyroscope API is not supported in this browser.");
+    // }
+
+    /***************************** */
+     // Check if the device supports DeviceMotionEvent
+if (window.DeviceMotionEvent) {
+    // Define a function to handle device motion events
+    function handleMotion(event) {
+        // Extract rotation rate data from the event
+        var rotationRate = event.rotationRate;
+
+        // Check if rotationRate is not null (available on some devices)
+        if (rotationRate) {
+            // Extract data for each axis (x, y, z)
+            var alpha = rotationRate.alpha; // rotation rate around the z-axis
+            var beta = rotationRate.beta;   // rotation rate around the x-axis
+            var gamma = rotationRate.gamma; // rotation rate around the y-axis
+
+            // Do something with the gyroscope data
+            console.log("Alpha:", alpha, "Beta:", beta, "Gamma:", gamma);
+        }
     }
-     
-     
+
+    // Add an event listener for the device motion event
+    window.addEventListener('devicemotion', handleMotion, false);
+} else {
+    // DeviceMotionEvent is not supported, handle the error
+    console.log("DeviceMotionEvent is not supported on this device.");
+}
+    
+    
+    
+    if (window.DeviceOrientationEvent) {
+    // Define a function to handle device orientation events
+    function handleOrientation(event) {
+        // Extract rotation data from the event
+        var alpha = event.alpha; // rotation around the z-axis
+        var beta = event.beta;   // rotation around the x-axis
+        var gamma = event.gamma; // rotation around the y-axis
+
+        // Do something with the gyroscope data
+        console.log("Alpha:", alpha, "Beta:", beta, "Gamma:", gamma);
+    }
+
+    // Add an event listener for the device orientation event
+    window.addEventListener('deviceorientation', handleOrientation, false);
+} else {
+    // DeviceOrientationEvent is not supported, handle the error
+    console.log("DeviceOrientationEvent is not supported on this device.");
+    }
+    
+
+
+    function handleOrientation(event) {
+ const alpha = event.alpha;
+ const beta = event.beta;
+ const gamma = event.gamma;
+ // Handle orientation data
+}
+
+function handleMotion(event) {
+ const acceleration = event.acceleration;
+ const rotationRate = event.rotationRate;
+ // Handle motion data
+}
+
+function requestAndAddListeners() {
+ if (typeof DeviceMotionEvent.requestPermission === 'function') {
+    // Request permission for iOS 13+
+    DeviceMotionEvent.requestPermission()
+      .then(permissionState => {
+        if (permissionState === 'granted') {
+          window.addEventListener('deviceorientation', handleOrientation, true);
+          window.addEventListener('devicemotion', handleMotion, true);
+        } else {
+          console.error('Permission to access motion data was denied');
+        }
+      })
+      .catch(console.error);
+ } else {
+    // For non-iOS 13+ devices, add event listeners directly
+    window.addEventListener('deviceorientation', handleOrientation, true);
+    window.addEventListener('devicemotion', handleMotion, true);
+ }
+}
+
+// Call this function in response to a user action, e.g., a button click
+    requestAndAddListeners();
+    
+
+     /******************************** */
        return () => { 
         scene.current?.removeEventListener('click', clickMovement)
         scene.current?.removeEventListener('dblclick', disablePointerLock)
        }
      
-   }, [currentPoint])
-   
-     
+   }, [currentPoint, currentPointTimeGapStatus])
+    
+  useEffect(() => {
+    //   window.addEventListener('load', () => {
+  
+    //  setLoadingStatus(false)
+    //   })
+    
+
+   const themeSet = () => {
+      // Your theme setting logic here
+      setLoadingStatus(false)
+    };
+
+    // Check if the document is already loaded
+    if (document.readyState === 'complete') {
+      themeSet(); // Directly call the function if DOM is already loaded
+    } else {
+      window.addEventListener('load', themeSet); // Attach the event listener if DOM is not yet loaded
+    }
+
+    // Cleanup function to remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('load', themeSet);
+    }; 
+    
+  }, [])
+  
   return (
     <>
+
+       {loadingStatus && <Loading />}
+
       {!isMobile && startingPopUp && <StartingPopUp setStartingPopUp={setStartingPopUp} />}
       {!isMobile && <span className='cross' style={{ backgroundImage: `url(${clickIcon}` }}>  </span>}
       {map && <span className= {`mapIcon ${mapStatus && 'active'}`} onClick={()=> setMapStatus(!mapStatus)} ><img src={mapIcon} alt="mapIcon" /></span> }
@@ -186,60 +279,66 @@ const scene = useRef()
            })}
         </div>
       </div>}
-      <a-scene cursor="rayOrigin: mouse" ref={scene}>
+      <a-scene ref={scene}>
+
  
-        {/* <a-camera wasd-controls='acceleration=1' id="camera"  rotation="0 0 0" reverseMouseDrag="true" pointerLockEnabled="true"></a-camera> */}
-        <a-camera look-controls="pointerLockEnabled:true;magicWindowTrackingEnabled:true;enabled:true" wasd-controls='acceleration=1;' reverseMouseDrag="true" id="camera" >
-         {/* {<a-entity
-            cursor="fuse: false"
-            position="0 0 -0.01"
-            geometry="primitive: ring; radiusInner: 0; radiusOuter: 0.0001"
-            material="color: red; shader: flat">
-          </a-entity>} */}
+      
+        <a-assets>
+          {points.map((point, index) => (
+            <img src={point.image} alt={`point-${index}`} id={`point-${index}`} />
+          ))}
+        </a-assets>
+        
+      {/* <a-scene cursor="rayOrigin: mouse" ref={scene}> */}
+         <a-camera look-controls="pointerLockEnabled:true;magicWindowTrackingEnabled:true;enabled:true" wasd-controls='acceleration=1;' reverseMouseDrag="true" id="camera" >
+              {/* <a-entity  cursor="click:true;"  position="0 0 -1"  geometry="primitive: ring; radiusInner: 0.025; radiusOuter: 0.03" material=" shader:flat; opacity:0" raycaster="object: .dinosaurmodel"></a-entity> */}
+        </a-camera>
+        {/* <a-camera look-controls="reverseMouseDrag:true" wasd-controls='acceleration=1' reverseMouseDrag="true"  id="camera" ></a-camera> */}
 
-              <a-entity  cursor="click:true;"  position="0 0 -1"  geometry="primitive: ring; radiusInner: 0.025; radiusOuter: 0.03" material=" shader:flat; opacity:0"
-                        raycaster="object: .dinosaurmodel"></a-entity>
-              </a-camera>
-{/* <a-entity raycaster="showLine: true; far: 200; lineColor: red; lineOpacity: 0.5"></a-entity> */}
-{/* <a-camera look-controls="reverseMouseDrag:true" wasd-controls='acceleration=1' reverseMouseDrag="true"  id="camera" ></a-camera> */}
+  
 
-        <a-sky
+            <a-sky
           radius="100"
           rotation="0 270 0"
           position="0 0 0"
-          // position="-70 0 150"
           side="double"
           id="fSky"
           material=" transparent: false; opacity: 1;"
-          // src={points[0].image}
-           src={points[isFirstSky ? currentPoint : oldPoint].image}
+           src={`#point-${ isFirstSky ? currentPoint : oldPoint }` }
           >
         </a-sky>
         <a-sky
           radius="100"
           rotation="0 270 0"
           position="0 0 0"
-          // position="70 0 150"
           side="double"
           id="fSky2"
           material=" transparent: false; opacity: 0;"
-          // src={points[1].image}
-          src={points[isFirstSky ? oldPoint : currentPoint].image}
+          src={`#point-${ isFirstSky ? oldPoint : currentPoint }` }
         > 
         </a-sky>
    
+   
         {points[currentPoint].neighbors.map((neighbor, index) => 
           <a-entity key={Math.random()} position="0 -5 0" rotation={`0 ${neighbor.degree} 0`} className="" >
-            <a-triangle className="clickable" rotation="-90 0 0" material="shader:flat; color:black" geometry="" position="0 0.6 -9" scale="2 2 2"
-              // onClick={() => move(neighbor.imageIndex)}
-              animation="property: material.opacity; from: 0.5; to: 0; dur: 1000; dir: alternate; loop: true;"></a-triangle>
+            <a-triangle className="clickable" rotation="-90 0 0" material="shader:flat; color:#fde337" geometry="" position="0 0.6 -9" scale="2 2 2"
+              // onClick={() => alert(neighbor.imageIndex)}
+              animation="property: material.opacity; from: 0.5; to: 0; dur: 500; dir: alternate; loop: true;"></a-triangle>
+            <a-triangle className="clickable" rotation="-90 0 0" material="shader:flat; color:#fde337" geometry="" position="0 1.1 -9" scale="1.5 1.5 1.5"
+              // onClick={() => alert(neighbor.imageIndex)}
+              animation="property: material.opacity; delay: 100; from: 0.5; to: 0; dur: 500; dir: alternate; loop: true;"></a-triangle>
+            <a-triangle className="clickable" rotation="-90 0 0" material="shader:flat; color:#fde337" geometry="" position="0 1.6 -9" scale="1 1 1"
+              // onClick={() => alert(neighbor.imageIndex)}
+              animation="property: material.opacity; delay: 200; from: 0.5; to: 0; dur: 500; dir: alternate; loop: true;"></a-triangle>
           </a-entity>
         )}
 
       </a-scene>
  
    
-
+      <footer>
+        Powered by <a href="https://virtualscene.tech" target="_blank" rel="noreferrer" >virtual Scene</a> 
+      </footer>
     </>
   );
 }

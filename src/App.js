@@ -236,11 +236,106 @@ function requestAndAddListeners() {
      
    }, [currentPoint, currentPointTimeGapStatus])
     
+  
   useEffect(() => {
-window.addEventListener('load', () => {
-   setLoadingStatus(false)
-})
+
+    let imageUrls = [];
+    
+    for (let i = 0; i < points.length; i++){
+      imageUrls.push(points[i].image)
+    }
+          
+          console.log(imageUrls, "imageUrls")
+    // eslint-disable-next-line no-undef
+    loadImagesInBatches(imageUrls, 3, "containerId");
   }, [])
+  
+  // useEffect(() => {
+  //   //   window.addEventListener('load', () => {
+  
+  //   //  setLoadingStatus(false)
+  //   //   })
+    
+
+  //  const themeSet = () => {
+  //     // Your theme setting logic here
+  //     setLoadingStatus(false)
+  //   };
+
+  //   // Check if the document is already loaded
+  //   if (document.readyState === 'complete') {
+  //     themeSet(); // Directly call the function if DOM is already loaded
+  //   } else {
+  //     window.addEventListener('load', themeSet); // Attach the event listener if DOM is not yet loaded
+  //   }
+
+  //   // Cleanup function to remove the event listener when the component unmounts
+  //   return () => {
+  //     window.removeEventListener('load', themeSet);
+  //   };
+    
+  // }, [])
+  
+  
+
+  
+function loadImagesInBatches(imageUrls, batchSize, containerId) {
+    let currentIndex = 0;
+    let container = document.getElementById(containerId);
+    function loadBatch() {
+        let endIndex = Math.min(currentIndex + batchSize, imageUrls.length);
+        let batch = imageUrls.slice(currentIndex, endIndex);
+      let imagesLoaded = 0;
+ 
+      batch.forEach(function (url, index) {
+          console.log(index , endIndex , batchSize, currentIndex)
+
+            let img = new Image();
+            img.onload = function() {
+                imagesLoaded++;
+                if (imagesLoaded === batch.length) {
+                    console.log(`Batch ${currentIndex / batchSize + 1} loaded`);
+                    currentIndex += batchSize;
+                    if (currentIndex < imageUrls.length) {
+                        if(currentIndex !== batchSize){
+                            loadBatch();
+                        }else{
+                          setTimeout(() => {
+                              setLoadingStatus(false)
+                                loadBatch();
+                            }, 100);
+                        }
+                    } else {
+                        console.log("All images loaded");
+                    }
+                }
+            };
+            img.onerror = function() {
+                imagesLoaded++;
+                console.error(`Error loading image ${url}`);
+                if (imagesLoaded === batch.length) {
+                    currentIndex += batchSize;
+                    if (currentIndex < imageUrls.length) {
+                        loadBatch();
+                    } else {
+                        console.log("All images loaded");
+                    }
+                }
+            };
+          img.src = url;
+          img.alt = `point-${index + currentIndex}` 
+          img.id =  `point-${index + currentIndex}` 
+            
+ 
+            container.appendChild(img); // Append image to container
+        });
+    }
+
+    loadBatch();
+}
+
+
+  
   
   return (
     <>
@@ -259,14 +354,15 @@ window.addEventListener('load', () => {
            })}
         </div>
       </div>}
+
       <a-scene ref={scene}>
 
  
       
-        <a-assets>
-          {points.map((point, index) => (
+        <a-assets id="containerId">
+          {/* {points.map((point, index) => (
             <img src={point.image} alt={`point-${index}`} id={`point-${index}`} />
-          ))}
+          ))} */}
         </a-assets>
         
       {/* <a-scene cursor="rayOrigin: mouse" ref={scene}> */}
@@ -275,7 +371,7 @@ window.addEventListener('load', () => {
         </a-camera>
         {/* <a-camera look-controls="reverseMouseDrag:true" wasd-controls='acceleration=1' reverseMouseDrag="true"  id="camera" ></a-camera> */}
 
-  
+        {!loadingStatus &&  <>
 
             <a-sky
           radius="100"
@@ -312,6 +408,7 @@ window.addEventListener('load', () => {
               animation="property: material.opacity; delay: 200; from: 0.5; to: 0; dur: 500; dir: alternate; loop: true;"></a-triangle>
           </a-entity>
         )}
+        </>}
 
       </a-scene>
  
