@@ -247,7 +247,7 @@ function requestAndAddListeners() {
           
           console.log(imageUrls, "imageUrls")
     // eslint-disable-next-line no-undef
-    loadImagesInBatches(imageUrls, 3, "containerId");
+    loadImagesInBatches(imageUrls, 15, "containerId");
   }, [])
   
   // useEffect(() => {
