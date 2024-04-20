@@ -371,8 +371,8 @@ function loadImagesInBatches(imageUrls, batchSize, containerId) {
         </a-camera>
         {/* <a-camera look-controls="reverseMouseDrag:true" wasd-controls='acceleration=1' reverseMouseDrag="true"  id="camera" ></a-camera> */}
 
-        {!loadingStatus &&  <>
-
+  
+    {!loadingStatus &&  <>
             <a-sky
           radius="100"
           rotation="0 270 0"
@@ -394,7 +394,8 @@ function loadImagesInBatches(imageUrls, batchSize, containerId) {
         > 
         </a-sky>
    
-   
+     
+          </>}
         {points[currentPoint].neighbors.map((neighbor, index) => 
           <a-entity key={Math.random()} position="0 -5 0" rotation={`0 ${neighbor.degree} 0`} className="" >
             <a-triangle className="clickable" rotation="-90 0 0" material="shader:flat; color:#fde337" geometry="" position="0 0.6 -9" scale="2 2 2"
@@ -408,7 +409,6 @@ function loadImagesInBatches(imageUrls, batchSize, containerId) {
               animation="property: material.opacity; delay: 200; from: 0.5; to: 0; dur: 500; dir: alternate; loop: true;"></a-triangle>
           </a-entity>
         )}
-        </>}
 
       </a-scene>
  
