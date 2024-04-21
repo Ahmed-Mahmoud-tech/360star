@@ -1,7 +1,10 @@
-marketing strategy
-create other models
-load more images
+ add salon and clinic to main project 
+ make the switch between two model from url query
+ add start point to url query
+ start call client and get the first client
 
+
+vr
 //////////////////////////////
 
 
