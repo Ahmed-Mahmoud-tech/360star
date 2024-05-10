@@ -81,7 +81,7 @@ button.action {
 
 .map img.mapImage {
     width: 300px;
-    max-width: 95vw;
+    max-width: calc(100vh - 120px);
 }
 
 .pinIcon {
@@ -90,6 +90,7 @@ button.action {
   background: #fffc6d;
   height: 10px;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .pinIcon.active {
@@ -108,7 +109,21 @@ button.action {
   background: white;
   padding: 7px;
   border-radius: 50%;
-  box-shadow: 0 0 5px 3px white;
+  box-shadow:0 0 6px 1px black ;
+  cursor: pointer;
+}
+ 
+.vrIcon {
+  position: fixed;
+  top: 60px;
+  z-index: 1000;
+  width: 35px;
+  right: 15px;
+  height: 35px;
+  background: white;
+  padding: 7px;
+  border-radius: 50%;
+  box-shadow: 0 0 6px 1px black;
   cursor: pointer;
 }
  

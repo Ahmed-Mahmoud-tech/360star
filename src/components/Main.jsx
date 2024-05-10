@@ -2,28 +2,33 @@ import React, { useEffect, useRef, useState } from 'react';
 import clickIcon from '../assets/images/click.png';
 import { models } from '../objects';
 import StartingPopUp from '../components/StartingPopUp/StartingPopUp';
-import mapIcon from '../assets/images/mapIcon.png'
-import map from '../assets/images/map.webp'
-
+import mapIcon from '../assets/images/map2.png'
+// import mapIcon from '../assets/images/mapIcon.png'
+import vr from '../assets/images/vr.png'
+ 
 import Loading from '../components/Loading/Loading';
 
 import { useLocation } from 'react-router-dom';
- 
+ import { useParams } from 'react-router-dom';
+
 let batchSize = 15;
 
 function Main() {
    const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const start = parseInt(queryParams.get('start')) || 0;
-  const model = queryParams.get('model') || "tower";
- console.log(start, "start")
-   const points = models[model].points
+  const { model } = useParams() || "tower"
+
+
+  // const model = queryParams.get('model') || "tower";
+  const map = models[model].map
+  const points = models[model].points
 
     const [loadingStatus, setLoadingStatus] = useState(true)
   
   if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/tower/sw.js')
+    navigator.serviceWorker.register('/env/sw.js')
       .then(registration => {
         console.log('Service Worker registered:', registration);
       })
@@ -317,17 +322,15 @@ function loadImagesInBatches(imageUrls, batchSize, containerId) {
     loadBatch();
 }
 
-
-  
-  
+ 
   return (
     <>
 
        {loadingStatus && <Loading />}
-
       {!isMobile && startingPopUp && <StartingPopUp setStartingPopUp={setStartingPopUp} />}
       {!isMobile && <span className='cross' style={{ backgroundImage: `url(${clickIcon}` }}>  </span>}
       {map && <span className= {`mapIcon ${mapStatus && 'active'}`} onClick={()=> setMapStatus(!mapStatus)} ><img src={mapIcon} alt="mapIcon" /></span> }
+   {isMobile && <span className= {`vrIcon ${mapStatus && 'active'}`} onClick={()=>     document.querySelector('a-scene').enterVR()} ><img src={vr} alt="mapIcon" /></span>}  
       {mapStatus && <div className='map'>
         <img src={map} alt="map" className='mapImage' />
 
@@ -338,7 +341,7 @@ function loadImagesInBatches(imageUrls, batchSize, containerId) {
         </div>
       </div>}
 
-      <a-scene ref={scene}>
+      <a-scene ref={scene} vr-mode-ui>
 
  
       
